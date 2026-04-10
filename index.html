@@ -43,6 +43,9 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
 .dstat-v{font-weight:700}
 .dcard-casual .dstat-v{color:var(--grn)}
 .dcard-medium .dstat-v{color:var(--gold)}
+.dcard-hardrock{border-color:rgba(255,68,102,.35);background:rgba(255,68,102,.04)}
+.dcard-hardrock:hover{border-color:var(--red);background:rgba(255,68,102,.1);box-shadow:0 0 30px rgba(255,68,102,.25);transform:translateY(-3px)}
+.dcard-hardrock .dcard-name, .dcard-hardrock .dstat-v{color:var(--red)}
 
 /* HOW TO PLAY OVERLAY */
 #scr-htp{background:rgba(3,3,16,.95);backdrop-filter:blur(12px);display:none}
@@ -173,6 +176,30 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
 /* Locked tower overlay in sidebar */
 .twc.locked{opacity:.45;cursor:not-allowed;position:relative}
 .twc.locked::after{content:'🔒';position:absolute;right:.5rem;top:50%;transform:translateY(-50%);font-size:.85rem}
+.shop-cat-title {
+  grid-column: 1 / -1;
+  font-family: 'Orbitron', monospace;
+  font-size: .95rem;
+  letter-spacing: 3px;
+  color: var(--acc);
+  text-align: left;
+  padding: 1.5rem 0 .6rem;
+  margin-top: .5rem;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  text-transform: uppercase;
+}
+.shop-cat-title::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 1.1rem;
+  background: var(--acc);
+  box-shadow: 0 0 10px var(--acc);
+}
+.cat-inter { color: #cc88ff; }
+.cat-inter::before { background: #cc88ff; box-shadow: 0 0 10px #cc88ff; }
 
 /* LOADOUT SCREEN */
 #scr-loadout{display:none;background:radial-gradient(ellipse 80% 60% at 50% 50%,#0a0d28 0%,var(--bg) 100%)}
@@ -198,6 +225,7 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
 .lo-diff-badge{display:inline-block;padding:.15rem .6rem;font-family:'Orbitron',monospace;font-size:.6rem;font-weight:700;letter-spacing:2px;border:1px solid;margin-bottom:.8rem}
 .lo-diff-casual{color:var(--grn);border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.06)}
 .lo-diff-medium{color:var(--gold);border-color:rgba(255,215,0,.3);background:rgba(255,215,0,.06)}
+.lo-diff-hardrock{color:var(--red);border-color:rgba(255,68,102,.3);background:rgba(255,68,102,.06)}
 
 /* ENEMY INDEX / BESTIARY */
 #scr-bestiary{display:none;background:radial-gradient(ellipse 80% 60% at 50% 50%,#1a0a0a 0%,var(--bg) 100%)}
@@ -253,9 +281,10 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
     <button class="mbtn" onclick="showShopScreen()" style="color:#cc88ff;border-color:#cc88ff">🛒 TOWER SHOP</button>
     <button class="mbtn" onclick="showBestiary()" style="color:#ff4466;border-color:#ff4466">👾 ENEMY INDEX</button>
     <button class="mbtn" onclick="showQuestion()" style="color:var(--gold);border-color:var(--gold)">❓ SECRET QUESTION</button>
+    <button class="mbtn" onclick="showLog()" style="color:rgba(150,180,255,.5);border-color:rgba(150,180,255,.2);font-size:.78rem">📜 UPDATE LOG</button>
     <button class="mbtn mbtn-alt" onclick="showHowTo()">📖 HOW TO PLAY</button>
     <div style="margin-top:1.5rem;font-size:.82rem;color:rgba(150,180,255,.45);letter-spacing:1px">⚡ Total Credits: <span class="cr-val" id="menu-cr">0</span></div>
-    <div style="margin-top:2rem;font-size:.7rem;letter-spacing:4px;color:rgba(0,229,255,.25);text-transform:uppercase">Created by <span style="color:rgba(0,229,255,.55);font-family:'Orbitron',monospace;font-weight:700">MOLARIX</span></div>
+    <div style="margin-top:2rem;font-size:.7rem;letter-spacing:4px;color:rgba(0,229,255,.25);text-transform:uppercase">Created by <span style="color:rgba(0,229,255,.55);font-family:'Orbitron',monospace;font-weight:700;cursor:pointer" onclick="showAdmin()">MOLARIX</span></div>
   </div>
 </div>
 
@@ -287,6 +316,18 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
           <div class="dstat"><span>Lives</span><span class="dstat-v">15❤️</span></div>
           <div class="dstat"><span>Enemy HP</span><span class="dstat-v">×1.0</span></div>
           <div class="dstat"><span>Wave Bonus</span><span class="dstat-v">+25💰</span></div>
+        </div>
+      </div>
+      <div class="dcard dcard-hardrock" onclick="showLoadout('hardrock')">
+        <div class="dcard-icon">💀</div>
+        <div class="dcard-name">HARD ROCK</div>
+        <div class="dcard-desc">10 lives. Exclusive final boss. 35 hellish waves with bulkier invaders.</div>
+        <div class="dcard-stats">
+          <div class="dstat"><span>Waves</span><span class="dstat-v">35 🌊</span></div>
+          <div class="dstat"><span>Starting Gold</span><span class="dstat-v" id="stg-hardrock">600💰</span></div>
+          <div class="dstat"><span>Lives</span><span class="dstat-v">10❤️</span></div>
+          <div class="dstat"><span>Enemy HP</span><span class="dstat-v">×1.25</span></div>
+          <div class="dstat"><span>Wave Bonus</span><span class="dstat-v">+15💰</span></div>
         </div>
       </div>
     </div>
@@ -371,6 +412,45 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
 </div>
 <div class="shop-toast" id="shop-toast">🔓 TOWER UNLOCKED!</div>
 
+<!-- ADMIN MODAL -->
+<div id="scr-admin" class="screen" style="display:none;background:rgba(3,3,16,.98);z-index:400">
+  <div class="q-box ein" style="border-color:#ff00aa;box-shadow:0 0 30px rgba(255,0,170,.15)">
+    <div class="q-title" style="color:#ff00aa">💻 ADMIN TERMINAL</div>
+    <div style="margin-bottom:1rem;color:rgba(150,180,255,0.7);font-size:0.8rem">Enter System Passphrase:</div>
+    <input type="password" id="adm-pw" style="width:100%;padding:.8rem;background:rgba(0,0,0,0.5);border:1px solid rgba(255,0,170,0.5);color:#fff;font-family:'Orbitron',monospace;text-align:center;margin-bottom:1rem;font-size:1rem;outline:none" placeholder="Awaiting Input...">
+    <div id="adm-step2" style="display:none">
+      <div style="margin-bottom:1rem;color:var(--grn);font-size:0.8rem">Access Granted. Enter Credits to Inject:</div>
+      <input type="number" id="adm-cr" style="width:100%;padding:.8rem;background:rgba(0,0,0,0.5);border:1px solid var(--grn);color:#fff;font-family:'Orbitron',monospace;text-align:center;margin-bottom:1rem;font-size:1rem;outline:none" placeholder="Amount...">
+    </div>
+    <div id="adm-msg" style="margin-bottom:1.5rem;color:var(--red);font-size:0.85rem;min-height:1rem"></div>
+    <div class="q-btns">
+      <button class="q-btn cy" style="color:#ff00aa;border-color:#ff00aa" onmouseover="this.style.background='rgba(255,0,170,.15)'" onmouseout="this.style.background='transparent'" onclick="adminSubmit()">SUBMIT</button>
+      <button class="q-btn cn" onclick="closeAdmin()">CANCEL</button>
+    </div>
+  </div>
+</div>
+
+<!-- UPDATE LOG -->
+<div id="scr-log" class="screen" style="display:none;background:rgba(3,3,16,.96);backdrop-filter:blur(10px)">
+  <div class="htp-box ein" style="max-width:600px;border-color:rgba(150,180,255,.2)">
+    <div class="htp-title" style="color:rgba(150,180,255,.8)">📜 NEON DEFENSE - UPDATE LOG</div>
+    <div style="max-height:400px;overflow-y:auto;padding-right:.5rem" id="log-content">
+      <div style="margin-bottom:1.5rem">
+        <div style="font-family:'Orbitron',monospace;color:var(--acc);font-weight:700;margin-bottom:.4rem">V.1 FULL RELEASE</div>
+        <div style="font-size:.82rem;color:rgba(150,180,255,.6);line-height:1.6">
+          • ยินดีต้อนรับสู่เวอร์ชันเต็ม! พร้อมระบบ Economy ใหม่<br>
+          • เพิ่มโหมดระดับเซียน: <b>Hard Rock Mode</b> (35 Waves)<br>
+          • เพิ่มศัตรูใหม่: <b>Runner Boss, Mystery unit, Necromancer</b><br>
+          • ระบบ Enemy Index (Bestiary) ค้นหาและเก็บข้อมูลศัตรู<br>
+          • ปรับสมดุลราคา Tower ใน Shop เพื่อความท้าทายที่มากขึ้น<br>
+          • เพิ่มระบบ Save/Load Loadout ทาวเวอร์ที่เลือกใช้
+        </div>
+      </div>
+    </div>
+    <button class="htp-close" onclick="closeLog()">↩ BACK TO MENU</button>
+  </div>
+</div>
+
 <!-- TOPBAR -->
 <div id="topbar">
   <div class="tlogo">⚡ NEON</div>
@@ -378,6 +458,7 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
   <div class="pill" id="sl"><span class="pico">❤️</span><div class="pbody"><span class="plbl">Lives</span><span class="pval" id="vl">20</span></div></div>
   <div class="pill" id="sw"><span class="pico">🌊</span><div class="pbody"><span class="plbl">Wave</span><span class="pval" id="vw">0/20</span></div></div>
   <div class="pill" id="ss"><span class="pico">⭐</span><div class="pbody"><span class="plbl">Score</span><span class="pval" id="vs">0</span></div></div>
+  <div class="pill"><span class="pico">🏰</span><div class="pbody"><span class="plbl">Towers</span><span class="pval" id="vt">0/40</span></div></div>
   <div class="tctrl">
     <button class="ctl" id="btnW" onclick="nextWave()">▶▶ NEXT WAVE</button>
     <button class="ctl" id="btnS" onclick="toggleSpeed()">⏩ 2X</button>
@@ -411,7 +492,7 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
           <div class="sr"><span class="sl2">🔥 Fire Rate</span><span class="sv" id="irt">—</span></div>
           <div class="sr"><span class="sl2">💰 Sell Value</span><span class="sv" id="isl">—</span></div>
         </div>
-        <div class="tgt-wrap">
+        <div class="tgt-wrap" id="tgt-wrap">
           <div class="tgt-lbl">🎯 Targeting</div>
           <div class="tgt-btns">
             <button class="tbt" id="tbt-first"  onclick="setTgt('first')"   >FIRST</button>
@@ -453,10 +534,11 @@ const TDEFS={
   sniper:{name:'Rail Gun',em:'🎯',cost:350,dmg:110,range:6.0,rate:0.35,col:'#ffff00',pCol:'#ffff00',pSpd:500,pSz:3,desc:'Long range · high damage',tgt:'strongest',shopCost:0},
   aoe:{name:'Plasma Burst',em:'💥',cost:400,dmg:36,range:2.4,rate:0.6,splash:1.3,col:'#ff6600',pCol:'#ff8800',pSpd:200,pSz:8,desc:'Area of effect damage',tgt:'first',shopCost:0},
   slow:{name:'Cryo Tower',em:'❄️',cost:250,dmg:8,range:2.8,rate:1.1,slowF:0.4,slowT:2.0,col:'#4499ff',pCol:'#88ccff',pSpd:250,pSz:5,desc:'Slows enemies · combo well',tgt:'first',shopCost:0},
-  laser:{name:'Laser Beam',em:'🔴',cost:750,dmg:30,range:3.5,rate:2.8,col:'#ff2266',pCol:'#ff4488',pSpd:600,pSz:2,desc:'Continuous beam · very fast',tgt:'first',shopCost:300},
-  tesla:{name:'Tesla Coil',em:'⚛️',cost:650,dmg:35,range:2.8,rate:0.85,splash:1.6,col:'#aa66ff',pCol:'#cc88ff',pSpd:450,pSz:6,desc:'Chain lightning · hits groups',tgt:'first',shopCost:500},
-  missile:{name:'Missile Pod',em:'🚀',cost:900,dmg:175,range:6.2,rate:0.18,splash:1.5,col:'#ff4400',pCol:'#ff6622',pSpd:180,pSz:10,desc:'Massive AOE · long range',tgt:'strongest',shopCost:750},
-  voidtw:{name:'Void Rift',em:'🌀',cost:550,dmg:14,range:3.2,rate:1.35,slowF:0.25,slowT:3.0,splash:1.4,col:'#8844cc',pCol:'#aa66ee',pSpd:200,pSz:7,desc:'Huge slow aura · area control',tgt:'first',shopCost:400},
+  laser:{name:'Laser Beam',em:'🔴',cost:750,dmg:30,range:3.5,rate:2.8,col:'#ff2266',pCol:'#ff4488',pSpd:600,pSz:2,desc:'Continuous beam · very fast',tgt:'first',shopCost:500},
+  tesla:{name:'Tesla Coil',em:'⚛️',cost:650,dmg:35,range:2.8,rate:0.85,splash:1.6,col:'#aa66ff',pCol:'#cc88ff',pSpd:450,pSz:6,desc:'Chain lightning · hits groups',tgt:'first',shopCost:900},
+  missile:{name:'Missile Pod',em:'🚀',cost:900,dmg:175,range:6.2,rate:0.18,splash:1.5,col:'#ff4400',pCol:'#ff6622',pSpd:180,pSz:10,desc:'Massive AOE · long range',tgt:'strongest',shopCost:1500},
+  voidtw:{name:'Void Rift',em:'🌀',cost:550,dmg:14,range:3.2,rate:1.35,slowF:0.25,slowT:3.0,splash:1.4,col:'#8844cc',pCol:'#aa66ee',pSpd:200,pSz:7,desc:'Huge slow aura · area control',tgt:'first',shopCost:700},
+  farm:{name:'Credit Miner',em:'💰',cost:500,dmg:25,range:0.5,rate:0.2,col:'#00dd88',pCol:'#00ff88',pSpd:0,pSz:0,desc:'Generates gold every 5 seconds',tgt:'none',shopCost:1200},
 };
 const LVM=[{d:1,r:1,f:1},{d:1.4,r:1.15,f:1.05},{d:2.2,r:1.35,f:1.15}];
 const UPC=[0,0.85,1.35];
@@ -467,6 +549,27 @@ const EDEFS={
   fast:{name:'Runner',hp:65,spd:120,rew:16,sz:8,col:'#ffdd00',arm:0},
   tank:{name:'Titan',hp:480,spd:38,rew:35,sz:15,col:'#bb44ff',arm:35},
   boss:{name:'BOSS',hp:1500,spd:28,rew:150,sz:22,col:'#ff0066',arm:50},
+  runner_boss:{name:'RUNNER BOSS',hp:2200,spd:85,rew:350,sz:22,col:'#ffaa00',arm:15,
+    desc:'An ultra-fast heavy unit designed to breach defensive lines with brute speed.'
+  },
+  mystery:{name:'MYSTERY UNIT',hp:900,spd:45,rew:50,sz:14,col:'#ffffff',
+    desc:'A strange shifting entity. Once destroyed, it reveals a random enemy from the rift.'
+  },
+  necro:{name:'NECROMANCER',hp:2500,spd:22,rew:150,sz:18,col:'#aa44ff',arm:20,
+    desc:'A dark sorcerer that can summon fallen units back into the battle.',
+    abil:{spawn:{cd:10,type:['basic','fast','tank'],n:5}}
+  },
+  hr_juggernaut:{name:'JUGGERNAUT',hp:5000,spd:15,rew:60,sz:18,col:'#aa3322',arm:85,
+    desc:'Hard Rock Exclusive: An immensely armored juggernaut that shrugs off most attacks.'
+  },
+  hr_specter:{name:'SPECTER',hp:1500,spd:70,rew:45,sz:11,col:'#ccffaa',arm:10,
+    desc:'Hard Rock Exclusive: A ghostly spirit that moves at extreme speeds.',
+    abil:{phase:{cd:6,dur:2}}
+  },
+  hr_mutant:{name:'MUTANT',hp:3500,spd:35,rew:50,sz:14,col:'#88ff22',arm:20,
+    desc:'Hard Rock Exclusive: A biological abomination with incredible regeneration.',
+    abil:{regen:{rate:150}}
+  },
   // ── CASUAL SPECIALS ─────────────────────────────────────────────
   shifter:{name:'PHASE SLIME',hp:250,spd:85,rew:25,sz:11,col:'#00ffff',arm:5,
     abil:{phase:{cd:6,dur:1.5}}
@@ -490,6 +593,13 @@ const EDEFS={
     // Abilities: regen HP, shield absorb, EMP disable towers
     abil:{regen:{rate:80},shield:{cd:10,dur:4,absorb:800},emp:{cd:18,range:3,dur:3}}
   },
+  oblivion:{name:'OBLIVION ENGINE',hp:35000,spd:18,rew:2500,sz:36,col:'#ff1133',arm:75,
+    // Abilities: rapid dash forward, spawn tanks
+    abil:{dash:{cd:12,dur:1.5,mul:3.5},spawn:{cd:14,type:'tank',n:3}}
+  },
+  hr_juggernaut:{name:'JUGGERNAUT',hp:5000,spd:15,rew:60,sz:18,col:'#aa3322',arm:85},
+  hr_specter:{name:'SPECTER',hp:1500,spd:70,rew:45,sz:11,col:'#ccffaa',arm:10,abil:{phase:{cd:6,dur:2}}},
+  hr_mutant:{name:'MUTANT',hp:3500,spd:35,rew:50,sz:14,col:'#88ff22',arm:20,abil:{regen:{rate:150}}},
 };
 
 // Wave data shared for both modes (first 20 = Casual, all 30 = Medium)
@@ -506,26 +616,32 @@ const WAVES_ALL=[
   [{t:'fast',n:22,iv:.5},{t:'tank',n:7,iv:1.8,d:5}],
   [{t:'basic',n:20,iv:.65},{t:'shifter',n:3,iv:2,d:6},{t:'tank',n:8,iv:1.5,d:11},{t:'boss',n:2,iv:10,d:19}],
   [{t:'basic',n:25,iv:.6},{t:'swarm',n:1,iv:1,d:8},{t:'tank',n:8,iv:1.5,d:5}],
-  [{t:'fast',n:25,iv:.45},{t:'shifter',n:4,iv:1.5,d:5},{t:'tank',n:10,iv:1.3,d:8}],
-  [{t:'basic',n:20,iv:.55},{t:'swarm',n:2,iv:6,d:6},{t:'boss',n:2,iv:8,d:14}],
+  [{t:'fast',n:25,iv:.45},{t:'shifter',n:4,iv:1.5,d:5},{t:'tank',n:10,iv:1.3,d:8},{t:'runner_boss',n:1,iv:1,d:15}],
+  [{t:'basic',n:20,iv:.55},{t:'swarm',n:2,iv:6,d:6},{t:'boss',n:2,iv:8,d:14},{t:'mystery',n:2,iv:5,d:10}],
   [{t:'tank',n:12,iv:1.1},{t:'shifter',n:5,iv:1.2,d:3},{t:'fast',n:20,iv:.4,d:8}],
-  [{t:'basic',n:20,iv:.5},{t:'swarm',n:2,iv:5,d:5},{t:'tank',n:10,iv:1,d:9},{t:'boss',n:3,iv:7,d:16}],
+  [{t:'basic',n:20,iv:.5},{t:'swarm',n:2,iv:5,d:5},{t:'tank',n:10,iv:1,d:9},{t:'boss',n:3,iv:7,d:16},{t:'aegis',n:1,iv:1,d:12}],
   [{t:'shifter',n:8,iv:1,d:0},{t:'basic',n:30,iv:.5},{t:'tank',n:12,iv:1,d:8}],
-  [{t:'fast',n:30,iv:.35},{t:'swarm',n:3,iv:4,d:5},{t:'boss',n:3,iv:7,d:10}],
+  [{t:'fast',n:30,iv:.35},{t:'swarm',n:3,iv:4,d:5},{t:'boss',n:3,iv:7,d:10},{t:'necro',n:1,iv:1,d:12}],
   [{t:'basic',n:25,iv:.45},{t:'fast',n:25,iv:.35,d:5},{t:'shifter',n:6,iv:1,d:8},{t:'tank',n:12,iv:.9,d:10}],
-  [{t:'tank',n:15,iv:.8},{t:'swarm',n:3,iv:4,d:2},{t:'boss',n:4,iv:6,d:10}],
-  [{t:'basic',n:30,iv:.4},{t:'shifter',n:8,iv:.8,d:5},{t:'swarm',n:4,iv:3,d:2},{t:'boss',n:3,iv:5,d:14},{t:'phantom',n:1,iv:1,d:28}],
+  [{t:'tank',n:15,iv:.8},{t:'swarm',n:3,iv:4,d:2},{t:'boss',n:4,iv:6,d:10},{t:'jammer',n:1,iv:1,d:12},{t:'mystery',n:2,iv:5,d:15}],
+  [{t:'basic',n:30,iv:.4},{t:'shifter',n:8,iv:.8,d:5},{t:'swarm',n:4,iv:3,d:2},{t:'boss',n:3,iv:5,d:14},{t:'phantom',n:1,iv:1,d:28},{t:'necro',n:1,iv:1,d:10}],
   // ── MEDIUM EXTRA (21-30) ───────────────────────────────────────
   [{t:'basic',n:35,iv:.38},{t:'aegis',n:1,iv:1,d:8},{t:'tank',n:14,iv:.9,d:10}],
-  [{t:'fast',n:35,iv:.3},{t:'jammer',n:1,iv:1,d:5},{t:'boss',n:4,iv:6.5,d:10}],
+  [{t:'fast',n:35,iv:.3},{t:'jammer',n:1,iv:1,d:5},{t:'boss',n:4,iv:6.5,d:10},{t:'runner_boss',n:1,iv:1,d:18}],
   [{t:'basic',n:30,iv:.35},{t:'aegis',n:2,iv:4,d:5},{t:'fast',n:30,iv:.28,d:5},{t:'tank',n:14,iv:.75,d:10}],
-  [{t:'tank',n:16,iv:.7},{t:'jammer',n:2,iv:4,d:3},{t:'boss',n:5,iv:5.5,d:10}],
-  [{t:'basic',n:35,iv:.33},{t:'aegis',n:3,iv:3,d:5},{t:'fast',n:35,iv:.26,d:8},{t:'tank',n:16,iv:.65,d:10},{t:'boss',n:5,iv:5,d:18}],
-  [{t:'fast',n:40,iv:.25},{t:'jammer',n:3,iv:3,d:4},{t:'boss',n:6,iv:5,d:10}],
+  [{t:'tank',n:16,iv:.7},{t:'jammer',n:2,iv:4,d:3},{t:'boss',n:5,iv:5.5,d:10},{t:'hr_mutant',n:4,iv:1.2,d:12},{t:'mystery',n:3,iv:3,d:15}],
+  [{t:'basic',n:35,iv:.33},{t:'aegis',n:3,iv:3,d:5},{t:'fast',n:35,iv:.26,d:8},{t:'tank',n:16,iv:.65,d:10},{t:'boss',n:5,iv:5,d:18},{t:'hr_specter',n:5,iv:.5,d:15}],
+  [{t:'fast',n:40,iv:.25},{t:'jammer',n:3,iv:3,d:4},{t:'boss',n:6,iv:5,d:10},{t:'hr_mutant',n:4,iv:1.2,d:12},{t:'necro',n:1,iv:1,d:15}],
   [{t:'basic',n:40,iv:.3},{t:'tank',n:18,iv:.6,d:8},{t:'aegis',n:4,iv:2.5,d:12},{t:'boss',n:5,iv:4.5,d:15}],
-  [{t:'fast',n:40,iv:.22},{t:'jammer',n:4,iv:2.5,d:6},{t:'tank',n:20,iv:.55,d:5},{t:'boss',n:6,iv:4,d:15}],
+  [{t:'fast',n:40,iv:.22},{t:'jammer',n:4,iv:2.5,d:6},{t:'tank',n:20,iv:.55,d:5},{t:'boss',n:6,iv:4,d:15},{t:'hr_juggernaut',n:3,iv:2,d:10},{t:'runner_boss',n:1,iv:1,d:20}],
   [{t:'tank',n:20,iv:.5},{t:'aegis',n:5,iv:2,d:2},{t:'jammer',n:3,iv:3,d:8},{t:'boss',n:8,iv:4,d:15}],
-  [{t:'basic',n:50,iv:.28},{t:'fast',n:50,iv:.2,d:6},{t:'aegis',n:6,iv:1.5,d:10},{t:'jammer',n:4,iv:2,d:10},{t:'boss',n:6,iv:3.5,d:16},{t:'omega',n:1,iv:1,d:30}],
+  [{t:'basic',n:50,iv:.28},{t:'fast',n:50,iv:.2,d:6},{t:'aegis',n:6,iv:1.5,d:10},{t:'jammer',n:4,iv:2,d:10},{t:'boss',n:6,iv:3.5,d:16},{t:'omega',n:1,iv:1,d:30},{t:'necro',n:2,iv:5,d:10},{t:'mystery',n:4,iv:1,d:8}],
+  // ── HARD ROCK EXTRA (31-35) ───────────────────────────────────────
+  [{t:'hr_specter',n:40,iv:.2},{t:'shifter',n:15,iv:.8,d:4},{t:'jammer',n:5,iv:2,d:8},{t:'hr_mutant',n:8,iv:2.5,d:10},{t:'runner_boss',n:2,iv:5,d:15}],
+  [{t:'basic',n:60,iv:.2},{t:'swarm',n:10,iv:2,d:4},{t:'hr_juggernaut',n:8,iv:1.5,d:6},{t:'boss',n:8,iv:3,d:10},{t:'necro',n:2,iv:4,d:12}],
+  [{t:'hr_mutant',n:25,iv:.5},{t:'aegis',n:10,iv:1.5,d:2},{t:'hr_specter',n:20,iv:.6,d:5},{t:'boss',n:6,iv:5,d:12},{t:'mystery',n:5,iv:.8,d:10}],
+  [{t:'fast',n:80,iv:.15},{t:'hr_juggernaut',n:12,iv:1.5,d:5},{t:'hr_mutant',n:15,iv:1.8,d:8},{t:'boss',n:6,iv:6,d:15},{t:'runner_boss',n:3,iv:3,d:12}],
+  [{t:'boss',n:15,iv:2.5},{t:'hr_specter',n:50,iv:.2,d:5},{t:'hr_juggernaut',n:12,iv:1,d:8},{t:'jammer',n:8,iv:1.5,d:10},{t:'oblivion',n:1,iv:1,d:25},{t:'necro',n:3,iv:6,d:5},{t:'mystery',n:8,iv:.5,d:10}],
 ];
 
 // ── UTILS ──────────────────────────────────────────────────────
@@ -634,6 +750,7 @@ class Enemy{
       this._warned=true;
       if(this.type==='phantom')setSt('⚠️ PHANTOM LORD APPROACHES! It can phase shift & teleport!');
       if(this.type==='omega')setSt('⚠️ OMEGA CORE DETECTED! It regenerates, shields & disables towers!');
+      if(this.type==='oblivion')setSt('🛑 OBLIVION ENGINE DETECTED! Prepare for devastating surges!');
     }
     this.st=Math.max(0,this.st-dt);if(this.st<=0)this.sf=1;this.spd=this.bspd*this.sf;
     if(this.wi>=WPS.length){this.reached=true;this.dead=true;return}
@@ -682,19 +799,34 @@ class Enemy{
         }
       }
     }
-    // ── PHANTOM: Spawn Ghosts ────────────────────────────────
+    // ── PHANTOM / OBLIVION: Spawn Minions ─────────────────────
     if(a.spawn){
       this.spawnCD-=dt;
       if(this.spawnCD<=0&&typeof G!=='undefined'&&G){
         this.spawnCD=a.spawn.cd;
         for(let i=0;i<a.spawn.n;i++){
-          const e=new Enemy(a.spawn.type);
+          const type=Array.isArray(a.spawn.type)?a.spawn.type[Math.floor(Math.random()*a.spawn.type.length)]:a.spawn.type;
+          const e=new Enemy(type);
           e.x=this.x+(Math.random()-0.5)*30;
           e.y=this.y+(Math.random()-0.5)*30;
           e.wi=this.wi;
           G.enemies.push(e);
         }
-        setSt('👻 Phantom Lord spawned ghost minions!');
+        if(this.type==='phantom')setSt('👻 Phantom Lord spawned ghost minions!');
+        else if(this.type==='oblivion')setSt('⚙️ Oblivion Engine deployed heavy backup!');
+        else if(this.type==='necro')setSt('💀 Necromancer summoned the dead!');
+      }
+    }
+    // ── OBLIVION: Dash ───────────────────────────────────────────
+    if(a.dash){
+      this.dashCD=(this.dashCD||a.dash.cd)-dt;
+      if(this.dashing){
+        this.dashTimer-=dt;
+        if(this.dashTimer<=0){this.dashing=false;this.bspd=EDEFS[this.type].spd;}
+      }else if(this.dashCD<=0){
+        this.dashing=true;this.dashTimer=a.dash.dur;this.dashCD=a.dash.cd;
+        this.bspd=EDEFS[this.type].spd*a.dash.mul;
+        if(typeof G!=='undefined'&&G)setSt('⚠️ OBLIVION ENGINE IS SURGING FORWARD!');
       }
     }
     // ── OMEGA: Regen ─────────────────────────────────────────
@@ -869,10 +1001,70 @@ class Enemy{
         cx.globalAlpha=1;
       }
       cx.restore();
+    // ── OBLIVION ENGINE ───────────────────────────────────────
+    }else if(this.type==='oblivion'){
+      cx.save();cx.translate(this.x,this.y);cx.rotate(this.ang);
+      cx.fillStyle=this.col;cx.shadowBlur=20*pulse;cx.shadowColor=this.col;
+      cx.beginPath();
+      cx.moveTo(s,0);cx.lineTo(s*.5,s*.5);cx.lineTo(-s*.5,s*.8);cx.lineTo(-s,0);cx.lineTo(-s*.5,-s*.8);cx.lineTo(s*.5,-s*.5);
+      cx.closePath();cx.fill();
+      cx.fillStyle='#000';cx.beginPath();cx.arc(0,0,s*.4,0,Math.PI*2);cx.fill();
+      cx.fillStyle=this.dashing?'#ff00aa':'#ffaa00';
+      cx.beginPath();cx.arc(0,0,s*.2,0,Math.PI*2);cx.fill();
+      cx.restore();
+    // ── HARD ROCK EXCLUSIVES ─────────────────────────────────
+    }else if(this.type==='hr_juggernaut'){
+      cx.save();cx.translate(this.x,this.y);cx.rotate(this.ang);
+      cx.fillStyle=this.col;cx.shadowBlur=10;cx.shadowColor=this.col;
+      cx.beginPath();
+      for(let i=0;i<8;i++){const a=i/8*Math.PI*2;cx.lineTo(Math.cos(a)*s*pulse,Math.sin(a)*s*pulse)}
+      cx.closePath();cx.fill();
+      cx.fillStyle='#220000';cx.fillRect(-s*.4,-s*.15,s*.8,s*.3);cx.fillRect(-s*.15,-s*.4,s*.3,s*.8);
+      cx.restore();
+    }else if(this.type==='hr_specter'){
+      cx.save();cx.translate(this.x,this.y);cx.rotate(this.ang);
+      if(this.phasing){cx.globalAlpha=0.15+Math.sin(this.pt*5)*0.1}
+      cx.fillStyle=this.col;cx.shadowBlur=15;cx.shadowColor=this.col;
+      cx.beginPath();cx.moveTo(s,0);cx.lineTo(-s*.5,-s*.8);cx.lineTo(-s,0);cx.lineTo(-s*.5,s*.8);cx.closePath();cx.fill();
+      cx.restore();
+    }else if(this.type==='hr_mutant'){
+      cx.save();cx.translate(this.x,this.y);
+      cx.fillStyle=this.col;cx.shadowBlur=15;cx.shadowColor=this.col;
+      cx.beginPath();
+      for(let i=0;i<8;i++){const a=i/8*Math.PI*2+this.pt*0.5,r2=s*(.8+Math.sin(this.pt*3+i)*.25);cx.lineTo(Math.cos(a)*r2,Math.sin(a)*r2)}
+      cx.closePath();cx.fill();
+      if(this.hp<this.mhp){
+         cx.globalAlpha=0.6;cx.fillStyle='#ffffff';
+         cx.beginPath();cx.arc(0,0,s*.4*(.5+Math.sin(this.pt*4)*.5),0,Math.PI*2);cx.fill();
+      }
+      cx.restore();
     // ── REGULAR BOSS ─────────────────────────────────────────
-    }else if(this.type==='boss'){
-      cx.save();cx.translate(this.x,this.y);cx.rotate(this.pt*.5);cx.fillStyle=this.col;
-      cx.beginPath();cx.moveTo(0,-s*1.4*pulse);cx.lineTo(s*pulse,0);cx.lineTo(0,s*1.4*pulse);cx.lineTo(-s*pulse,0);cx.closePath();cx.fill();
+    // ── NECROMANCER ─────────────────────────────────────────
+    }else if(this.type==='necro'){
+      cx.save();cx.translate(this.x,this.y);cx.rotate(this.pt*0.3);
+      cx.fillStyle='#110022';cx.shadowBlur=20;cx.shadowColor=this.col;
+      cx.beginPath();cx.moveTo(0,-s*1.2);cx.lineTo(s,-s*0.3);cx.lineTo(s*0.6,s);cx.lineTo(-s*0.6,s);cx.lineTo(-s,-s*0.3);cx.closePath();cx.fill();
+      cx.fillStyle=this.col;cx.beginPath();cx.arc(0,-s*0.4,s*0.5,0,Math.PI*2);cx.fill();
+      cx.fillStyle='#fff';cx.beginPath();cx.arc(-s*0.2,-s*0.4,2,0,Math.PI*2);cx.arc(s*0.2,-s*0.4,2,0,Math.PI*2);cx.fill();
+      cx.restore();
+    // ── MYSTERY ──────────────────────────────────────────────
+    }else if(this.type==='mystery'){
+      cx.save();cx.translate(this.x,this.y);cx.rotate(this.pt*0.8);
+      const cols=['#fff','#00e5ff','#ff00aa','#ffd700'];
+      const c=cols[Math.floor((this.pt*2)%cols.length)];
+      cx.fillStyle=c;cx.shadowBlur=15;cx.shadowColor=c;
+      cx.fillRect(-s,-s,s*2,s*2);
+      cx.fillStyle='#000';cx.font='bold 12px Orbitron';cx.textAlign='center';cx.fillText('?',0,5);
+      cx.restore();
+    // ── RUNNER BOSS / BOSS ───────────────────────────────────
+    }else if(this.type==='runner_boss'||this.type==='boss'){
+      cx.save();cx.translate(this.x,this.y);cx.rotate(this.type==='runner_boss'?this.ang:this.pt*.5);
+      cx.fillStyle=this.col;cx.shadowBlur=this.type==='runner_boss'?25:15;cx.shadowColor=this.col;
+      if(this.type==='runner_boss'){
+        cx.beginPath();cx.moveTo(s*1.5,0);cx.lineTo(-s,-s);cx.lineTo(-s*0.5,0);cx.lineTo(-s,s);cx.closePath();cx.fill();
+      }else{
+        cx.beginPath();cx.moveTo(0,-s*1.4*pulse);cx.lineTo(s*pulse,0);cx.lineTo(0,s*1.4*pulse);cx.lineTo(-s*pulse,0);cx.closePath();cx.fill();
+      }
       cx.fillStyle='rgba(255,255,255,.4)';cx.beginPath();cx.arc(0,0,s*.4,0,Math.PI*2);cx.fill();cx.restore();
     }else if(this.type==='tank'){
       cx.fillStyle=this.col;cx.beginPath();
@@ -894,7 +1086,7 @@ class Enemy{
       cx.fillStyle='rgba(255,170,0,.4)';cx.fillRect(bx,by-5,bw*sr,2);
     }
     // Boss name label
-    if(this.type==='phantom'||this.type==='omega'){
+    if(this.type==='phantom'||this.type==='omega'||this.type==='oblivion'||this.type==='runner_boss'||this.type==='necro'){
       cx.save();cx.font='bold 9px Orbitron,monospace';cx.textAlign='center';
       cx.fillStyle=this.col;cx.shadowBlur=8;cx.shadowColor=this.col;
       cx.fillText(this.name,this.x,this.y+s+16);cx.restore();
@@ -915,6 +1107,7 @@ class Tower{
   get upCost(){if(this.level>=3)return null;return Math.floor(TDEFS[this.type].cost*UPC[this.level])}
   upgrade(){if(this.level>=3)return;const uc=this.upCost;this.level++;this.sell+=Math.floor(uc*.35)}
   _target(enemies){
+    if(this.tgtMode==='none'||this.type==='farm')return null;
     const e=this.eff,ok=enemies.filter(x=>!x.dead&&!x.reached&&D(this,x)<=e.rpx);
     if(!ok.length)return null;
     switch(this.tgtMode){
@@ -925,7 +1118,24 @@ class Tower{
     }
   }
   update(dt,enemies,projs){
-    this.pt+=dt*2;this.cd=Math.max(0,this.cd-dt);this.fa=Math.max(0,this.fa-dt*4);
+    this.pt+=dt*2;this.fa=Math.max(0,this.fa-dt*4);
+    if(this.type==='farm'){
+      if(typeof G!=='undefined'&&G&&!G.wm.active)return;
+      this.cd=Math.max(0,this.cd-dt);
+      if(this.cd<=0){
+        const e=this.eff;this.cd=1/e.rate;this.fa=1;this.ang+=Math.PI/2;
+        if(typeof G!=='undefined'&&G){
+          const amt=Math.floor(e.dmg);
+          G.gold+=amt;hud();
+          for(let i=0;i<6;i++){
+            const an=Math.random()*Math.PI*2,sp=20+Math.random()*30;
+            G.parts.push(new Particle(this.x,this.y,'#00ff88',Math.cos(an)*sp,Math.sin(an)*sp,2+Math.random()*2,.4+Math.random()*.3));
+          }
+        }
+      }
+      return;
+    }
+    this.cd=Math.max(0,this.cd-dt);
     if(!this.target||this.target.dead||this.target.reached||D(this,this.target)>this.eff.rpx)this.target=this._target(enemies);
     if(this.target&&this.cd<=0){
       this.ang=Math.atan2(this.target.y-this.y,this.target.x-this.x);
@@ -935,10 +1145,24 @@ class Tower{
   }
   draw(cx){
     const e=this.eff,pulse=.95+Math.sin(this.pt)*.05,fa=this.fa;
-    if(this.selected){
+    if(this.selected&&e.rpx>25){
       cx.save();cx.strokeStyle=e.col;cx.lineWidth=1;cx.globalAlpha=.2;cx.setLineDash([4,6]);
       cx.beginPath();cx.arc(this.x,this.y,e.rpx,0,Math.PI*2);cx.stroke();cx.setLineDash([]);
       cx.globalAlpha=.06;cx.fillStyle=e.col;cx.beginPath();cx.arc(this.x,this.y,e.rpx,0,Math.PI*2);cx.fill();cx.restore();
+    }
+    if(this.type==='farm'){
+      cx.save();cx.shadowBlur=15+fa*20;cx.shadowColor=e.col;
+      cx.fillStyle='rgba(10,10,26,.95)';cx.strokeStyle=e.col;cx.lineWidth=this.selected?2.5:1.5;
+      rrect(cx,this.x-20,this.y-20,40,40,5);cx.fill();cx.stroke();
+      cx.translate(this.x,this.y);cx.rotate(this.ang+this.pt*0.5);
+      cx.fillStyle=e.col;
+      cx.beginPath();cx.moveTo(0,-12);cx.lineTo(12,0);cx.lineTo(0,12);cx.lineTo(-12,0);cx.closePath();cx.fill();
+      if(fa>.2){
+        cx.globalAlpha=(fa-.2);cx.fillStyle='#00ff88';cx.shadowBlur=30;cx.beginPath();cx.arc(0,0,14,0,Math.PI*2);cx.fill();cx.globalAlpha=1;
+      }
+      cx.fillStyle='rgba(255,255,255,.5)';cx.beginPath();cx.arc(0,0,3,0,Math.PI*2);cx.fill();
+      cx.restore();
+      return;
     }
     cx.save();cx.shadowBlur=15+fa*20;cx.shadowColor=e.col;
     cx.fillStyle='rgba(10,10,26,.95)';cx.strokeStyle=e.col;cx.lineWidth=this.selected?2.5:1.5;
@@ -961,7 +1185,54 @@ class WaveManager{
   launch(){
     if(this.idx>=this.total)return false;
     const def=this.waves[this.idx];this.queue=[];
-    for(const g of def){const dd=g.d||0;for(let i=0;i<g.n;i++)this.queue.push({t:g.t,at:dd+i*g.iv})}
+    for(const g of def){
+      let t=g.t;
+      if(typeof G!=='undefined'){
+        const d=G.diff;
+        if(d==='hardrock'&&(t==='phantom'||t==='omega')) t=(Math.random()>.5?'boss':'shifter');
+        else if(d==='medium'&&t==='phantom') t=(Math.random()>.5?'boss':'shifter');
+        
+        // Downscale special enemies if mode is too low
+        if(d==='casual'){
+          if(t==='aegis'||t==='jammer'||t.startsWith('hr_')) t=(Math.random()>.4?'tank':'boss');
+        } else if(d==='medium'){
+          if(t.startsWith('hr_')) t=(Math.random()>.4?'tank':'boss');
+        }
+      }
+      const dd=g.d||0;for(let i=0;i<g.n;i++)this.queue.push({t:t,at:dd+i*g.iv})
+    }
+    
+    // Dynamic Injection for Recurring Special Enemies
+    if(typeof G!=='undefined'){
+      const d=G.diff;
+      const w=this.idx+1; // Current wave number
+      
+      // Runner Boss recurrence (Wave 12+)
+      if(w>12){
+        let n=0;
+        if(d==='casual'&&Math.random()>.7) n=1;
+        else if(d==='medium') n=1;
+        else if(d==='hardrock') n=1+Math.floor((w-12)/7);
+        for(let i=0;i<n;i++)this.queue.push({t:'runner_boss',at:5+Math.random()*15});
+      }
+      
+      // Mystery Unit recurrence (Wave 13+)
+      if(w>13){
+        let n=(d==='casual'?1:(d==='medium'?2:3));
+        if(d==='hardrock') n+=Math.floor((w-13)/5);
+        for(let i=0;i<n;i++)this.queue.push({t:'mystery',at:3+Math.random()*20});
+      }
+      
+      // Necromancer recurrence (Wave 17+)
+      if(w>17){
+        let n=0;
+        if(d==='casual'&&Math.random()>.6) n=1;
+        else if(d==='medium') n=1;
+        else if(d==='hardrock') n=1+Math.floor((w-17)/10);
+        for(let i=0;i<n;i++)this.queue.push({t:'necro',at:8+Math.random()*12});
+      }
+    }
+    
     this.queue.sort((a,b)=>a.at-b.at);this.timer=0;this.active=true;this.spawned=false;this.idx++;return true;
   }
   update(dt){
@@ -988,11 +1259,12 @@ class Game{
   reset(diff){
     this.diff=diff||this.diff||'medium';
     const casual=this.diff==='casual';
-    this.hpMult=casual?0.7:1.0;
+    const hr=this.diff==='hardrock';
+    this.hpMult=casual?0.7:(hr?1.25:1.0);
     this.waveBonusBase=casual?35:15;
-    this.gold=600+(hasMolarixPerk()?100:0);
-    this.lives=casual?25:15;
-    const totalWaves=casual?20:30;
+    this.gold=600;if(hasMolarixPerk())this.gold+=100;
+    this.lives=casual?25:(hr?10:15);
+    const totalWaves=casual?20:(hr?35:30);
     this.score=0;this.kills=0;
     this.towers=[];this.enemies=[];this.projs=[];this.parts=[];
     this.wm=new WaveManager(totalWaves);this.selTw=null;this.paused=false;this.speed=1;this.autoTimer=0;
@@ -1027,16 +1299,23 @@ class Game{
     for(const t of this.towers)t.update(dt,alive,this.projs);
     for(const p of this.projs)if(!p.dead)p.update(dt,this.enemies,this.parts);
     for(const p of this.parts)if(!p.dead)p.update(dt);
+    let toSpawn=[];
     for(const e of this.enemies){
       if(e.dead&&!e.rewarded){
         e.rewarded=true;this.gold+=e.rew;this.score+=e.rew*3;this.kills++;
-        // Track kill for bestiary
         recordKill(e.type);
         for(let i=0;i<10;i++){const a=Math.random()*Math.PI*2,s=50+Math.random()*100;this.parts.push(new Particle(e.x,e.y,e.col,Math.cos(a)*s,Math.sin(a)*s,2+Math.random()*2,.35+Math.random()*.35))}
         hud();
+        if(e.type==='mystery'){
+           const types=['basic','fast','tank','shifter','boss','swarm'];
+           const nt=types[Math.floor(Math.random()*types.length)];
+           const ne=new Enemy(nt);ne.x=e.x;ne.y=e.y;ne.wi=e.wi;toSpawn.push(ne);
+           setSt('❓ Mystery Unit revealed: '+ne.name+'!');
+        }
       }
     }
     this.enemies=this.enemies.filter(e=>!e.dead&&!e.reached);
+    if(toSpawn.length)this.enemies.push(...toSpawn);
     this.projs=this.projs.filter(p=>!p.dead);this.parts=this.parts.filter(p=>!p.dead);
     if(this.wm.done(this.enemies.length)){
       this.wm.active=false;
@@ -1099,6 +1378,14 @@ class Game{
   _place(c,r){
     if(c<0||c>=COLS||r<0||r>=ROWS)return false;
     if(PATH.has(c+','+r))return false;if(this.towers.some(t=>t.col===c&&t.row===r))return false;
+    if(this.towers.length>=40){
+      setSt('⚠️ MAX LIMIT REACHED (40/40 TOWERS)!');
+      return false;
+    }
+    if(this.selType==='farm'&&this.towers.filter(t=>t.type==='farm').length>=12){
+      setSt('⚠️ MAX 12 CREDIT MINERS ALLOWED!');
+      return false;
+    }
     const cost=TDEFS[this.selType].cost;if(this.gold<cost)return false;
     this.gold-=cost;this.towers.push(new Tower(c,r,this.selType));hud();return true;
   }
@@ -1125,7 +1412,7 @@ class Game{
   _over(){
     if(this.state==='playing'){
       this.state='gameover';
-      const full=this.diff==='casual'?175:350;
+      const full=this.diff==='casual'?175:(this.diff==='hardrock'?700:350);
       const consolation=Math.round((this.wm.idx/this.wm.total)*0.7*full);
       this.creditsEarned=consolation;
       if(consolation>0)addCredits(consolation);
@@ -1135,7 +1422,7 @@ class Game{
   _win(){
     if(this.state==='playing'){
       this.state='win';
-      const earned=this.diff==='casual'?175:350;
+      const earned=this.diff==='casual'?175:(this.diff==='hardrock'?700:350);
       this.creditsEarned=earned;
       addCredits(earned);
       showGO(true);
@@ -1151,6 +1438,7 @@ function hud(){
   document.getElementById('vl').textContent=G.lives;
   document.getElementById('vs').textContent=G.score.toLocaleString();
   document.getElementById('vw').textContent=G.wm.idx+'/'+G.wm.total;
+  const vt=document.getElementById('vt');if(vt)vt.textContent=G.towers.length+'/40';
   if(G.selTw&&document.getElementById('sbi').style.display!=='none')showInfo(G.selTw);
 }
 function setSt(m){document.getElementById('wstatus').textContent=m}
@@ -1173,9 +1461,24 @@ function showInfo(tw){
   document.getElementById('ilv').textContent='Lv. '+tw.level;
   const dots=document.querySelectorAll('#idots .ld');
   dots.forEach((d,i)=>{const on=i<tw.level;d.style.background=on?e.col:'rgba(255,255,255,.08)';d.style.boxShadow=on?`0 0 5px ${e.col}`:''});
-  document.getElementById('idmg').textContent=Math.round(e.dmg)+(e.splash?' (AOE)':'');
-  document.getElementById('irng').textContent=e.range.toFixed(1)+' cells';
-  document.getElementById('irt').textContent=e.rate.toFixed(2)+'/s';
+  
+  if(tw.type==='farm'){
+    document.getElementById('tgt-wrap').style.display='none';
+    document.getElementById('idmg').parentElement.innerHTML='<span class="sl2">⛏️ Income</span><span class="sv" id="idmg"></span>';
+    document.getElementById('idmg').textContent='+ '+Math.floor(e.dmg)+'💰';
+    document.getElementById('irng').parentElement.style.display='none';
+    document.getElementById('irt').parentElement.innerHTML='<span class="sl2">⏳ Delay</span><span class="sv" id="irt"></span>';
+    document.getElementById('irt').textContent=(1/e.rate).toFixed(1)+'s';
+  }else{
+    document.getElementById('tgt-wrap').style.display='block';
+    document.getElementById('idmg').parentElement.innerHTML='<span class="sl2">⚔️ Damage</span><span class="sv" id="idmg"></span>';
+    document.getElementById('idmg').textContent=Math.round(e.dmg)+(e.splash?' (AOE)':'');
+    document.getElementById('irng').parentElement.style.display='flex';
+    document.getElementById('irt').parentElement.innerHTML='<span class="sl2">🔥 Fire Rate</span><span class="sv" id="irt"></span>';
+    document.getElementById('irng').textContent=e.range.toFixed(1)+' cells';
+    document.getElementById('irt').textContent=e.rate.toFixed(2)+'/s';
+  }
+  
   document.getElementById('isl').textContent=tw.sell+'💰';
   // targeting buttons
   ['first','last','strongest','random'].forEach(m=>{
@@ -1238,12 +1541,19 @@ const ENEMY_DESCS={
   fast:'Speedy runner that rushes through defenses. Low HP but very fast movement.',
   tank:'Heavily armored titan. Slow but extremely tanky with damage reduction.',
   boss:'Powerful boss unit. High HP, high armor. Appears in later waves.',
+  runner_boss:'An ultra-fast heavy unit designed to breach defensive lines with brute speed.',
+  mystery:'A strange shifting entity. Once destroyed, it reveals a random enemy from the rift.',
+  necro:'A dark sorcerer that can summon fallen units back into the battle.',
   shifter:'Special variant. Periodically shifts out of phase to dodge attacks.',
   swarm:'Special variant. Sluggish but periodically spawns fast runners.',
   aegis:'Special variant. Heavily armored drone that generates temporary force fields.',
   jammer:'Special variant. Emits an EMP pulse that temporarily disables nearby towers.',
   phantom:'Final boss of Casual mode. Can phase shift to become invulnerable, teleport forward, and spawn ghost minions.',
-  omega:'Final boss of Medium mode. Regenerates HP, deploys damage-absorbing shields, and emits EMP pulses that disable nearby towers.'
+  omega:'Final boss of Medium mode. Regenerates HP, deploys damage-absorbing shields, and emits EMP pulses.',
+  oblivion:'A massive war machine that surges forward with devastating speed and spawns heavy backup.',
+  hr_juggernaut:'Hard Rock Exclusive: An immensely armored juggernaut that shrugs off most attacks.',
+  hr_specter:'Hard Rock Exclusive: A ghostly spirit that moves at extreme speeds.',
+  hr_mutant:'Hard Rock Exclusive: A biological abomination with incredible regeneration.'
 };
 
 function showBestiary(){
@@ -1274,14 +1584,18 @@ function renderBestiary(){
         const parts=[];
         if(d.abil.phase)parts.push('⚡ Phase Shift: Invulnerable '+d.abil.phase.dur+'s');
         if(d.abil.tele)parts.push('🌀 Teleport: '+d.abil.tele.dist+'px fwd');
-        if(d.abil.spawn)parts.push('👻 Summon: '+d.abil.spawn.n+'x '+EDEFS[d.abil.spawn.type].name);
+        if(d.abil.spawn){
+          const tn=Array.isArray(d.abil.spawn.type)?'Minions':EDEFS[d.abil.spawn.type].name;
+          parts.push('👻 Summon: '+d.abil.spawn.n+'x '+tn);
+        }
         if(d.abil.regen)parts.push('💚 Regen: '+d.abil.regen.rate+' HP/s');
         if(d.abil.shield)parts.push('🛡️ Shield: absorb '+d.abil.shield.absorb);
         if(d.abil.emp)parts.push('⚡ EMP: disable '+d.abil.emp.dur+'s, range '+d.abil.emp.range);
+        if(d.abil.dash)parts.push('🏎️ Dash: Surge x'+d.abil.dash.mul+' speed');
         if(parts.length)abilText=`<div class="bi-abil">${parts.join('<br>')}</div>`;
       }
       card.innerHTML=`
-        <div class="bi-em">${type==='boss'?'💀':type==='phantom'?'👻':type==='omega'?'🔥':type==='tank'?'🛡️':type==='fast'?'💨':type==='shifter'?'✨':type==='swarm'?'🦂':type==='aegis'?'🕋':type==='jammer'?'🛸':'👾'}</div>
+        <div class="bi-em">${type==='boss'?'💀':type==='phantom'?'👻':type==='omega'?'🔥':type==='tank'?'🛡️':type==='fast'?'💨':type==='shifter'?'✨':type==='swarm'?'🦂':type==='aegis'?'🕋':type==='jammer'?'🛸':type==='oblivion'?'🦾':type==='necro'?'🧙':type==='runner_boss'?'🏎️':type==='mystery'?'❓':type==='hr_juggernaut'?'🧱':type==='hr_specter'?'👻':type==='hr_mutant'?'🧪':'👾'}</div>
         <div class="bi-nm" style="color:${d.col}">${d.name}</div>
         <div class="bi-desc">${ENEMY_DESCS[type]||d.name}</div>
         <div class="bi-stats">
@@ -1391,33 +1705,52 @@ function renderShopGrid(){
   document.getElementById('shop-cr').textContent=getCredits()+' ⚡';
   const grid=document.getElementById('shop-grid');
   grid.innerHTML='';
+  
+  const starter=[], inter=[];
   for(const[type,d]of Object.entries(TDEFS)){
-    const owned=isUnlocked(type);
-    const isDefault=d.shopCost===0;
-    const canAfford=getCredits()>=d.shopCost;
-    const card=document.createElement('div');
-    card.className='shop-card'+(owned&&!isDefault?' owned':'')+(isDefault?' default-tower':'');
-    card.style.setProperty('--card-col',d.col);
-    let btnClass,btnText;
-    if(isDefault){btnClass='is-default';btnText='⚡ DEFAULT TOWER'}
-    else if(owned){btnClass='is-owned';btnText='✓ UNLOCKED'}
-    else if(canAfford){btnClass='can-buy';btnText=`🔓 UNLOCK · ${d.shopCost} ⚡`}
-    else{btnClass='cant-buy';btnText=`🔒 ${d.shopCost} ⚡ NEEDED`}
-    card.innerHTML=`
-      <div class="sc-emoji">${d.em}</div>
-      <div class="sc-name" style="color:${d.col}">${d.name}</div>
-      <div class="sc-desc">${d.desc}</div>
-      <div class="sc-stats">
-        <div class="sc-stat"><span class="sc-stat-l">⚔️ Damage</span><span class="sc-stat-v">${d.dmg}${d.splash?' (AOE)':''}</span></div>
-        <div class="sc-stat"><span class="sc-stat-l">📡 Range</span><span class="sc-stat-v">${d.range} cells</span></div>
-        <div class="sc-stat"><span class="sc-stat-l">🔥 Fire Rate</span><span class="sc-stat-v">${d.rate}/s</span></div>
-        <div class="sc-stat"><span class="sc-stat-l">💰 In-Game Cost</span><span class="sc-stat-v">${d.cost}g</span></div>
-        ${d.slowF?`<div class="sc-stat"><span class="sc-stat-l">❄️ Slow</span><span class="sc-stat-v">${Math.round((1-d.slowF)*100)}% for ${d.slowT}s</span></div>`:''}
-      </div>
-      <button class="sc-buy ${btnClass}" data-type="${type}"${isDefault||owned?' disabled':''}>${btnText}</button>
-    `;
-    grid.appendChild(card);
+    if(d.shopCost===0) starter.push({type,d});
+    else inter.push({type,d});
   }
+
+  const renderSection=(list,title,cls)=>{
+    if(list.length===0)return;
+    const h=document.createElement('div');
+    h.className='shop-cat-title '+cls;
+    h.textContent=title;
+    grid.appendChild(h);
+    
+    for(const item of list){
+      const {type,d}=item;
+      const owned=isUnlocked(type);
+      const isDefault=d.shopCost===0;
+      const canAfford=getCredits()>=d.shopCost;
+      const card=document.createElement('div');
+      card.className='shop-card'+(owned&&!isDefault?' owned':'')+(isDefault?' default-tower':'');
+      card.style.setProperty('--card-col',d.col);
+      let btnClass,btnText;
+      if(isDefault){btnClass='is-default';btnText='⚡ DEFAULT TOWER'}
+      else if(owned){btnClass='is-owned';btnText='✓ UNLOCKED'}
+      else if(canAfford){btnClass='can-buy';btnText=`🔓 UNLOCK · ${d.shopCost} ⚡`}
+      else{btnClass='cant-buy';btnText=`🔒 ${d.shopCost} ⚡ NEEDED`}
+      card.innerHTML=`
+        <div class="sc-emoji">${d.em}</div>
+        <div class="sc-name" style="color:${d.col}">${d.name}</div>
+        <div class="sc-desc">${d.desc}</div>
+        <div class="sc-stats">
+          <div class="sc-stat"><span class="sc-stat-l">⚔️ Damage</span><span class="sc-stat-v">${d.dmg}${d.splash?' (AOE)':''}</span></div>
+          <div class="sc-stat"><span class="sc-stat-l">📡 Range</span><span class="sc-stat-v">${d.range} cells</span></div>
+          <div class="sc-stat"><span class="sc-stat-l">🔥 Fire Rate</span><span class="sc-stat-v">${d.rate}/s</span></div>
+          <div class="sc-stat"><span class="sc-stat-l">💰 In-Game Cost</span><span class="sc-stat-v">${d.cost}g</span></div>
+          ${d.slowF?`<div class="sc-stat"><span class="sc-stat-l">❄️ Slow</span><span class="sc-stat-v">${Math.round((1-d.slowF)*100)}% for ${d.slowT}s</span></div>`:''}
+        </div>
+        <button class="sc-buy ${btnClass}" data-type="${type}"${isDefault||owned?' disabled':''}>${btnText}</button>
+      `;
+      grid.appendChild(card);
+    }
+  };
+
+  renderSection(starter,'Starter Towers','');
+  renderSection(inter,'Intermediate Towers','cat-inter');
   // bind buy buttons
   grid.querySelectorAll('.sc-buy.can-buy').forEach(btn=>{
     btn.addEventListener('click',()=>{
@@ -1456,14 +1789,19 @@ let activeLoadout=[];
 
 function showLoadout(diff){
   pendingDiff=diff;
-  // Pre-select first 4 default towers
   const unlocked=Object.keys(TDEFS).filter(t=>isUnlocked(t));
-  activeLoadout=unlocked.slice(0,Math.min(MAX_LOADOUT,unlocked.length));
+  let saved=null;
+  try{saved=JSON.parse(localStorage.getItem('neonTDLoadout'))}catch(e){}
+  if(saved&&Array.isArray(saved)&&saved.length>0&&saved.every(t=>unlocked.includes(t))){
+    activeLoadout=saved.slice(0,MAX_LOADOUT);
+  }else{
+    activeLoadout=unlocked.slice(0,Math.min(MAX_LOADOUT,unlocked.length));
+  }
   document.getElementById('scr-diff').style.display='none';
   document.getElementById('scr-loadout').style.display='flex';
   const badge=document.getElementById('lo-diff-badge');
   badge.className='lo-diff-badge lo-diff-'+diff;
-  badge.textContent=diff==='casual'?'🌿 CASUAL':'⚔️ MEDIUM';
+  badge.textContent=diff==='casual'?'🌿 CASUAL':(diff==='hardrock'?'💀 HARD ROCK':'⚔️ MEDIUM');
   renderLoadoutGrid();
 }
 function backFromLoadout(){
@@ -1505,6 +1843,7 @@ function renderLoadoutGrid(){
 }
 function launchFromLoadout(){
   if(activeLoadout.length===0)return;
+  localStorage.setItem('neonTDLoadout',JSON.stringify(activeLoadout));
   document.getElementById('scr-loadout').style.display='none';
   startGame(pendingDiff);
 }
@@ -1580,6 +1919,61 @@ document.getElementById('scr-loadout').style.display='none';
 document.getElementById('scr-bestiary').style.display='none';
 document.getElementById('scr-question').style.display='none';
 updateMenuUI();
+
+// ── ADMIN BACKDOOR ─────────────────────────────────────────────
+let adminPhase=1;
+function showAdmin(){
+  document.getElementById('scr-menu').style.display='none';
+  document.getElementById('scr-admin').style.display='flex';
+  document.getElementById('adm-pw').value='';
+  document.getElementById('adm-cr').value='';
+  document.getElementById('adm-pw').style.display='block';
+  document.getElementById('adm-step2').style.display='none';
+  document.getElementById('adm-msg').textContent='';
+  document.getElementById('adm-pw').focus();
+  adminPhase=1;
+}
+function closeAdmin(){
+  document.getElementById('scr-admin').style.display='none';
+  document.getElementById('scr-menu').style.display='flex';
+}
+function adminSubmit(){
+  if(adminPhase===1){
+    const pw=document.getElementById('adm-pw').value;
+    if(pw==='MOLARIX IS THE GOD TIER OF CHEMISTRY'){
+      adminPhase=2;
+      document.getElementById('adm-pw').style.display='none';
+      document.getElementById('adm-step2').style.display='block';
+      document.getElementById('adm-msg').textContent='';
+      document.getElementById('adm-cr').focus();
+    }else{
+      document.getElementById('adm-msg').textContent='ACCESS DENIED: Invalid Passphrase.';
+    }
+  }else if(adminPhase===2){
+    const amt=parseInt(document.getElementById('adm-cr').value);
+    if(!isNaN(amt)&&amt>0){
+      addCredits(amt);
+      updateMenuCr();
+      closeAdmin();
+      const toast=document.createElement('div');
+      toast.style.cssText='position:fixed;top:20px;left:50%;transform:translateX(-50%);background:rgba(0,255,136,.9);color:#000;padding:10px 20px;border-radius:4px;font-family:"Orbitron",monospace;font-weight:700;z-index:1000;animation:ein 0.3s;';
+      toast.innerHTML=`⚙️ INJECTED ${amt} CREDITS`;
+      document.body.appendChild(toast);
+      setTimeout(()=>{toast.style.opacity=0;toast.style.transition='opacity 0.5s';setTimeout(()=>toast.remove(),500)},2000);
+    }else{
+      document.getElementById('adm-msg').textContent='ERROR: Invalid amount.';
+    }
+  }
+}
+
+function showLog(){
+  document.getElementById('scr-menu').style.display='none';
+  document.getElementById('scr-log').style.display='flex';
+}
+function closeLog(){
+  document.getElementById('scr-log').style.display='none';
+  document.getElementById('scr-menu').style.display='flex';
+}
 </script>
 </body>
 </html>
