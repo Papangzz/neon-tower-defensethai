@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>⚡ Neon Tower Defense</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -273,6 +273,38 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
 .ein{animation:ein .3s ease both}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 .shimmer{background:linear-gradient(90deg,transparent 30%,rgba(255,255,255,.05) 50%,transparent 70%);background-size:200% 100%;animation:shimmer 3s infinite}
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width: 800px) {
+  html, body { overflow: auto; height: auto; min-height: 100%; }
+  body { overflow-x: hidden; }
+  .screen { position: fixed; height: 100%; }
+  
+  #topbar { height: auto; padding: 0.5rem; flex-wrap: wrap; gap: 0.3rem; }
+  .tlogo { font-size: 0.75rem; width: 100%; text-align: center; margin-bottom: 0.2rem; }
+  .pill { padding: 0.2rem 0.4rem; transform: scale(0.9); margin: -2px; }
+  .plbl { display: none; } /* Hide labels on mobile to save space */
+  .tctrl { width: 100%; justify-content: center; margin-top: 0.2rem; }
+  .ctl { padding: 0.4rem 0.6rem; font-size: 0.6rem; flex: 1; text-align: center; }
+
+  #glayout { flex-direction: column; height: auto; }
+  #cwrap { width: 100%; height: auto; aspect-ratio: 3/2; } /* Keep 900:600 ratio */
+  #sb { width: 100%; border-left: none; border-top: 1px solid var(--bdr); min-height: 300px; }
+  
+  .shop-grid, .lo-grid, .bi-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .dcard { padding: 1rem 0.5rem; }
+  .htp-box { padding: 1.5rem; }
+  
+  /* Horizontal scroll for tower shop in sidebar if needed, but let's wrap for now */
+  .sbs { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.5rem; }
+  .sbl { width: 100%; font-size: 0.5rem; margin-bottom: 0.2rem; }
+  .twc { width: calc(50% - 0.2rem); margin-bottom: 0; padding: 0.4rem; }
+  .twn { font-size: 0.7rem; }
+  .twd { display: none; } /* Hide desc in list to save vertical space */
+  
+  /* Game fonts sizing */
+  #povl { font-size: 1.5rem; }
+  .iname { font-size: 0.75rem; }
+}
 </style>
 </head>
 <body>
@@ -1679,6 +1711,22 @@ class Game{
       const r=this.cv.getBoundingClientRect(),sx=CW/r.width,sy=CH/r.height;
       this._click(Math.floor((e.clientX-r.left)*sx/CELL),Math.floor((e.clientY-r.top)*sy/CELL));
     });
+    this.cv.addEventListener('touchstart',e=>{
+      if(this.state!=='playing'||this.paused)return;
+      const touch = e.touches[0];
+      const r=this.cv.getBoundingClientRect(),sx=CW/r.width,sy=CH/r.height;
+      const c = Math.floor((touch.clientX-r.left)*sx/CELL);
+      const r_idx = Math.floor((touch.clientY-r.top)*sy/CELL);
+      
+      // On mobile, first touch acts as hover to show range/desel
+      if(!this.hover || this.hover.c !== c || this.hover.r !== r_idx) {
+        this.hover = {c, r:r_idx};
+      } else {
+        // Second touch on same spot acts as click
+        this._click(c, r_idx);
+      }
+      e.preventDefault();
+    }, {passive: false});
   }
   _over(){
     if(this.state==='playing'){
