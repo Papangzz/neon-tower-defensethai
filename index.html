@@ -58,6 +58,18 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
 .htp-close{display:block;margin-top:1.5rem;width:100%;padding:.75rem;font-family:'Orbitron',monospace;font-size:.78rem;font-weight:700;letter-spacing:2px;cursor:pointer;border:1px solid rgba(150,180,255,.25);background:transparent;color:rgba(150,180,255,.5);text-transform:uppercase;transition:all .2s}
 .htp-close:hover{background:rgba(150,180,255,.06);color:var(--txtB)}
 
+/* MAP SELECTION */
+#scr-map .htp-box { max-width: 800px; }
+.map-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+.map-card { background: rgba(0,0,0,0.4); border: 2px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; cursor: pointer; transition: 0.3s; text-align: center; position: relative; overflow: hidden; }
+.map-card:hover { border-color: var(--cy); transform: translateY(-5px); box-shadow: 0 5px 25px rgba(0,229,255,0.2); }
+.map-card.sel { border-color: var(--grn); background: rgba(0,255,136,0.05); }
+.mc-em { font-size: 3rem; margin-bottom: 1rem; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
+.mc-name { font-family: 'Orbitron', monospace; font-size: 1.2rem; margin-bottom: 0.5rem; color: #fff; }
+.mc-desc { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.4; margin-bottom: 1.5rem; min-height: 2.5rem; }
+.mc-btn { width: 100%; padding: 0.8rem; background: transparent; border: 1px solid var(--cy); color: var(--cy); font-family: 'Orbitron', monospace; font-size: 0.9rem; cursor: pointer; border-radius: 6px; transition: 0.2s; }
+.map-card:hover .mc-btn { background: var(--cy); color: #000; font-weight: 700; }
+
 /* TOPBAR */
 #topbar{height:54px;background:var(--panel);border-bottom:1px solid var(--bdr);display:none;align-items:center;padding:0 1rem;gap:.45rem;flex-shrink:0;z-index:10}
 .tlogo{font-family:'Orbitron',monospace;font-size:.88rem;font-weight:900;color:var(--acc);text-shadow:0 0 12px rgba(0,229,255,.7);letter-spacing:3px;margin-right:.5rem;white-space:nowrap}
@@ -128,6 +140,9 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
 .tbt{flex:1;padding:.3rem 0;font-family:'Orbitron',monospace;font-size:.55rem;font-weight:700;letter-spacing:.5px;cursor:pointer;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.2);color:rgba(150,180,255,.45);text-align:center;text-transform:uppercase;transition:all .18s;line-height:1.4}
 .tbt:hover{background:rgba(255,255,255,.06);color:var(--txtB)}
 .tbt.on{border-color:var(--acc);color:var(--acc);background:rgba(0,229,255,.1);box-shadow:0 0 6px rgba(0,229,255,.2)}
+.sk-btn{display:block;width:100%;padding:.6rem .5rem;font-family:'Orbitron',monospace;font-size:0.7rem;font-weight:700;letter-spacing:1px;cursor:pointer;background:rgba(255,255,255,0.05);color:var(--acc);border:1px solid var(--acc);text-transform:uppercase;margin-bottom:.5rem;transition:all .2s;text-align:center}
+.sk-btn:hover:not(:disabled){background:rgba(0,229,255,0.15);box-shadow:0 0 15px rgba(0,229,255,0.25)}
+.sk-btn:disabled{opacity:.3;cursor:not-allowed}
 
 /* GAME OVER */
 #scr-go{display:none;background:rgba(3,3,16,.93);backdrop-filter:blur(12px)}
@@ -146,6 +161,24 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
 .shop-title{font-family:'Orbitron',monospace;font-size:1.6rem;font-weight:900;color:#cc88ff;text-shadow:0 0 25px rgba(200,130,255,.5),0 0 60px rgba(200,130,255,.25);letter-spacing:4px;margin-bottom:.3rem}
 .shop-sub{font-size:.78rem;letter-spacing:6px;color:rgba(200,160,255,.4);text-transform:uppercase;margin-bottom:.5rem}
 .shop-credits{font-family:'Orbitron',monospace;font-size:1rem;color:var(--gold);margin-bottom:1.5rem;text-shadow:0 0 12px rgba(255,215,0,.4)}
+.shop-cat-title{grid-column:1 / -1;font-family:'Orbitron',monospace;font-size:.85rem;font-weight:700;letter-spacing:3px;text-align:left;padding:1.4rem 0 .5rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:.5rem;text-transform:uppercase;color:var(--acc)}
+.cat-inter{color:#f2ff00;border-bottom-color:rgba(242,255,0,.2)}
+.cat-advance{color:#cc88ff;border-bottom-color:rgba(204,136,255,.2)}
+.shop-cat-admin{animation:rainbow-text 3s infinite linear;border-bottom:2px solid;padding-top:2rem}
+@keyframes rainbow-text{
+  0%{color:#ff0000;border-bottom-color:#ff0000}20%{color:#ffff00;border-bottom-color:#ffff00}
+  40%{color:#00ff00;border-bottom-color:#00ff00}60%{color:#00ffff;border-bottom-color:#00ffff}
+  80%{color:#0000ff;border-bottom-color:#0000ff}100%{color:#ff00ff;border-bottom-color:#ff00ff}
+}
+.rainbow-border{animation:rainbow-border 3s infinite linear;border-width:2px !important;border-style:solid !important}
+@keyframes rainbow-border{
+  0%{border-color:#ff0000;box-shadow:0 0 15px rgba(255,0,0,.3)}
+  20%{border-color:#ffff00;box-shadow:0 0 15px rgba(255,255,0,.3)}
+  40%{border-color:#00ff00;box-shadow:0 0 15px rgba(0,255,0,.3)}
+  60%{border-color:#00ffff;box-shadow:0 0 15px rgba(0,255,255,.3)}
+  80%{border-color:#0000ff;box-shadow:0 0 15px rgba(0,0,255,.3)}
+  100%{border-color:#ff00ff;box-shadow:0 0 15px rgba(255,0,255,.3)}
+}
 .shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem}
 .shop-card{padding:1.2rem 1rem;border:2px solid rgba(255,255,255,.08);background:rgba(8,8,26,.9);transition:all .3s;position:relative;overflow:hidden}
 .shop-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--card-col,#cc88ff),transparent);opacity:0;transition:opacity .3s}
@@ -176,30 +209,6 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
 /* Locked tower overlay in sidebar */
 .twc.locked{opacity:.45;cursor:not-allowed;position:relative}
 .twc.locked::after{content:'🔒';position:absolute;right:.5rem;top:50%;transform:translateY(-50%);font-size:.85rem}
-.shop-cat-title {
-  grid-column: 1 / -1;
-  font-family: 'Orbitron', monospace;
-  font-size: .95rem;
-  letter-spacing: 3px;
-  color: var(--acc);
-  text-align: left;
-  padding: 1.5rem 0 .6rem;
-  margin-top: .5rem;
-  display: flex;
-  align-items: center;
-  gap: .8rem;
-  text-transform: uppercase;
-}
-.shop-cat-title::before {
-  content: '';
-  display: inline-block;
-  width: 4px;
-  height: 1.1rem;
-  background: var(--acc);
-  box-shadow: 0 0 10px var(--acc);
-}
-.cat-inter { color: #cc88ff; }
-.cat-inter::before { background: #cc88ff; box-shadow: 0 0 10px #cc88ff; }
 
 /* LOADOUT SCREEN */
 #scr-loadout{display:none;background:radial-gradient(ellipse 80% 60% at 50% 50%,#0a0d28 0%,var(--bg) 100%)}
@@ -222,10 +231,6 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
 .lo-go{width:280px;margin:.8rem auto 0;padding:.85rem 1.5rem;font-family:'Orbitron',monospace;font-size:.92rem;font-weight:900;letter-spacing:3px;cursor:pointer;border:2px solid var(--grn);background:transparent;color:var(--grn);text-transform:uppercase;transition:all .3s}
 .lo-go:hover:not(:disabled){background:rgba(0,255,136,.1);box-shadow:0 0 30px rgba(0,255,136,.35);transform:translateY(-2px)}
 .lo-go:disabled{opacity:.3;cursor:not-allowed;border-color:rgba(150,180,255,.2);color:rgba(150,180,255,.3)}
-.lo-diff-badge{display:inline-block;padding:.15rem .6rem;font-family:'Orbitron',monospace;font-size:.6rem;font-weight:700;letter-spacing:2px;border:1px solid;margin-bottom:.8rem}
-.lo-diff-casual{color:var(--grn);border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.06)}
-.lo-diff-medium{color:var(--gold);border-color:rgba(255,215,0,.3);background:rgba(255,215,0,.06)}
-.lo-diff-hardrock{color:var(--red);border-color:rgba(255,68,102,.3);background:rgba(255,68,102,.06)}
 
 /* ENEMY INDEX / BESTIARY */
 #scr-bestiary{display:none;background:radial-gradient(ellipse 80% 60% at 50% 50%,#1a0a0a 0%,var(--bg) 100%)}
@@ -343,8 +348,20 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
     <div id="lo-diff-badge"></div>
     <div class="lo-counter">Towers Selected: <span class="lo-cnt" id="lo-cnt">0</span> / <span>5</span></div>
     <div class="lo-grid" id="lo-grid"></div>
-    <button class="lo-go" id="lo-go-btn" disabled onclick="launchFromLoadout()">⚡ START BATTLE</button>
+    <button class="lo-go" id="lo-go-btn" disabled onclick="showMapSelect()">⚡ NEXT: SELECT MAP</button>
     <button class="mbtn mbtn-alt" style="width:200px;margin-top:.6rem" onclick="backFromLoadout()">↩ BACK</button>
+  </div>
+</div>
+
+<!-- MAP SELECTION SCREEN -->
+<div id="scr-map" class="screen" style="display:none">
+  <div class="htp-box ein">
+    <div class="htp-title" style="color:var(--cy)">🗺️ SELECT BATTLEFIELD</div>
+    <div class="htp-sub" style="margin-bottom:1rem;text-align:center">Choose a location to deploy your defenses.</div>
+    <div id="map-grid" class="map-grid"></div>
+    <div style="margin-top:2rem;text-align:center">
+      <button class="htp-close" onclick="backFromMap()">↩ BACK TO LOADOUT</button>
+    </div>
   </div>
 </div>
 
@@ -436,6 +453,28 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
     <div class="htp-title" style="color:rgba(150,180,255,.8)">📜 NEON DEFENSE - UPDATE LOG</div>
     <div style="max-height:400px;overflow-y:auto;padding-right:.5rem" id="log-content">
       <div style="margin-bottom:1.5rem">
+        <div style="font-family:'Orbitron',monospace;color:var(--cy);font-weight:700;margin-bottom:.4rem">V.1.2 - MAPS & OVERDRIVE</div>
+        <div style="font-size:.82rem;color:rgba(150,180,255,.6);line-height:1.6">
+          • <b>Multi-Map System</b>: เพิ่มระบบเลือกแผนที่ก่อนเริ่มเกม!<br>
+          • <b>New Map</b>: "Winding Circuit" แผนที่ทางโค้งมหาโหดสำหรับสายวางแผน<br>
+          • <b>Overclocker Revamp</b>: เพิ่มสกิลกดใช้ ⚡ Overdrive +30% Fire Rate (ไม่ซ้อนทับกัน)<br>
+          • <b>Visual Feedback</b>: ทาวเวอร์เปลี่ยนสีเป็น Electric Cyan เมื่อใช้สกิล พร้อมแถบคูลดาวน์<br>
+          • <b>Boss Balancing</b>: บอสสุดท้ายทั้ง 3 โหมด "กันสถานะ Slow" อย่างสมบูรณ์<br>
+          • <b>Advance Section</b>: แยกหมวดหมู่ทาวเวอร์ระดับสูงใน Shop พร้อมปรับราคาความภูมิใจ<br>
+          • <b>Surrender Button</b>: เพิ่มปุ่ม 🏳️ EXIT เพื่อถอนตัวและรับ Credits ตามผลงาน<br>
+          • <b>QoL</b>: ปรับปรุงสัญลักษณ์ IN/OUT ให้แสดงตรงตามพิกัดของแต่ละแผนที่
+        </div>
+      </div>
+      <div style="margin-bottom:1.5rem">
+        <div style="font-family:'Orbitron',monospace;color:var(--acc);font-weight:700;margin-bottom:.4rem">V.1.1 - MYSTERY & SINGULARITY</div>
+        <div style="font-size:.82rem;color:rgba(150,180,255,.6);line-height:1.6">
+          • เพิ่มบอสใหม่: <b>MYSTERY BOSS</b> เมื่อตายจะสุ่มร่างแยกสุดโหดหนึ่งตัว!<br>
+          • เพิ่มทาวเวอร์ใหม่ 1: <b>Photon Overclocker</b> บัฟความเร็วการยิงให้ทาวเวอร์ใกล้เคียง +35%<br>
+          • เพิ่มทาวเวอร์ใหม่ 2: <b>Singularity Cannon</b> ยิงกระสุนหลุมดำ สร้างแรงระเบิด AOE มหาศาลพร้อมสโลว์<br>
+          • ปรับปรุงกราฟิกของ Mystery Unit และเพิ่มระดับความยากของช่วงท้ายเกมใน Hard Rock Mode
+        </div>
+      </div>
+      <div style="margin-bottom:1.5rem">
         <div style="font-family:'Orbitron',monospace;color:var(--acc);font-weight:700;margin-bottom:.4rem">V.1 FULL RELEASE</div>
         <div style="font-size:.82rem;color:rgba(150,180,255,.6);line-height:1.6">
           • ยินดีต้อนรับสู่เวอร์ชันเต็ม! พร้อมระบบ Economy ใหม่<br>
@@ -463,6 +502,7 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
     <button class="ctl" id="btnW" onclick="nextWave()">▶▶ NEXT WAVE</button>
     <button class="ctl" id="btnS" onclick="toggleSpeed()">⏩ 2X</button>
     <button class="ctl" id="btnP" onclick="togglePause()">⏸ PAUSE</button>
+    <button class="ctl surrender-btn" onclick="surrender()">🏳️ EXIT</button>
   </div>
 </div>
 
@@ -518,15 +558,38 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
 const CELL=50,COLS=18,ROWS=12,CW=COLS*CELL,CH=ROWS*CELL;
 
 // Waypoints: pixel center of path (col*50+25, row*50+25)
-const WPS=[{x:-25,y:125},{x:225,y:125},{x:225,y:425},{x:725,y:425},{x:725,y:175},{x:925,y:175}];
+// Map Data System
+const MAPS = [
+  {
+    name: 'Cyber Line',
+    desc: 'Strategic classic path with balanced spacing.',
+    em: '🏙️',
+    wps: [{x:-25,y:125},{x:225,y:125},{x:225,y:425},{x:725,y:425},{x:725,y:175},{x:925,y:175}],
+    segs: [[0,2,4,2],[4,2,4,8],[4,8,14,8],[14,3,14,8],[14,3,17,3]]
+  },
+  {
+    name: 'Winding Circuit',
+    desc: 'Dense curves and narrow corridors for maximal defense.',
+    em: '🌀',
+    wps: [{x:-25,y:75},{x:125,y:75},{x:125,y:475},{x:275,y:475},{x:275,y:125},{x:425,y:125},{x:425,y:525},{x:575,y:525},{x:575,y:225},{x:725,y:225},{x:725,y:425},{x:925,y:425}],
+    segs: [[0,1,2,1],[2,1,2,9],[2,9,5,9],[5,9,5,2],[5,2,8,2],[8,2,8,10],[8,10,11,10],[11,10,11,4],[11,4,14,4],[14,4,14,8],[14,8,17,8]]
+  }
+];
 
-// Path cells set
-const PATH=new Set();
+let WPS = [];
+let PATH = new Set();
+
 function seg(c1,r1,c2,r2){
   if(r1===r2)for(let c=Math.min(c1,c2);c<=Math.max(c1,c2);c++)PATH.add(c+','+r1);
   else for(let r=Math.min(r1,r2);r<=Math.max(r1,r2);r++)PATH.add(c1+','+r);
 }
-seg(0,2,4,2);seg(4,2,4,8);seg(4,8,14,8);seg(14,3,14,8);seg(14,3,17,3);
+
+function initMap(idx){
+  const m = MAPS[idx];
+  WPS = m.wps;
+  PATH = new Set();
+  m.segs.forEach(s => seg(...s));
+}
 
 // Tower definitions
 const TDEFS={
@@ -539,6 +602,9 @@ const TDEFS={
   missile:{name:'Missile Pod',em:'🚀',cost:900,dmg:175,range:6.2,rate:0.18,splash:1.5,col:'#ff4400',pCol:'#ff6622',pSpd:180,pSz:10,desc:'Massive AOE · long range',tgt:'strongest',shopCost:1500},
   voidtw:{name:'Void Rift',em:'🌀',cost:550,dmg:14,range:3.2,rate:1.35,slowF:0.25,slowT:3.0,splash:1.4,col:'#8844cc',pCol:'#aa66ee',pSpd:200,pSz:7,desc:'Huge slow aura · area control',tgt:'first',shopCost:700},
   farm:{name:'Credit Miner',em:'💰',cost:500,dmg:25,range:0.5,rate:0.2,col:'#00dd88',pCol:'#00ff88',pSpd:0,pSz:0,desc:'Generates gold every 5 seconds',tgt:'none',shopCost:1200},
+  overclocker:{name:'Photon Overclocker',em:'⚡',cost:1200,dmg:0,range:2.8,rate:1.0,col:'#ffdd00',pCol:'#ffff00',pSpd:0,pSz:0,desc:'Buffs nearby towers: +15-25% FR · Max 3',tgt:'none',shopCost:2500},
+  singularity:{name:'Singularity Cannon',em:'🌀',cost:1600,dmg:280,range:4.2,rate:0.2,splash:3.5,slowF:0.2,slowT:4.0,col:'#8844ff',pCol:'#aa66ff',pSpd:180,pSz:12,desc:'Explosive gravity rift: Massive AOE & slow',tgt:'strongest',shopCost:3500},
+  kwera_wer:{name:'KwerAwer (God Artist)',em:'🖌️',cost:0,dmg:450,range:250,rate:2.2,col:'#ff00ff',isSecret:true,shopCost:99999}
 };
 const LVM=[{d:1,r:1,f:1},{d:1.4,r:1.15,f:1.05},{d:2.2,r:1.35,f:1.15}];
 const UPC=[0,0.85,1.35];
@@ -570,36 +636,40 @@ const EDEFS={
     desc:'Hard Rock Exclusive: A biological abomination with incredible regeneration.',
     abil:{regen:{rate:150}}
   },
+  mystery_boss:{name:'MYSTERY BOSS',hp:12000,spd:22,rew:500,sz:28,col:'#00ffff',arm:40,
+    desc:'A massive glitch in the system. Upon destruction, it unleashes a high-tier reality anomaly.'
+  },
   // ── CASUAL SPECIALS ─────────────────────────────────────────────
-  shifter:{name:'PHASE SLIME',hp:250,spd:85,rew:25,sz:11,col:'#00ffff',arm:5,
+  shifter:{name:'PHASE SLIME',hp:450,spd:85,rew:25,sz:11,col:'#00ffff',arm:5,
     abil:{phase:{cd:6,dur:1.5}}
   },
-  swarm:{name:'HIVE MOTHER',hp:900,spd:30,rew:80,sz:18,col:'#ffaa00',arm:20,
-    abil:{spawn:{cd:6,type:'fast',n:1}}
+  swarm:{name:'HIVE MOTHER',hp:1800,spd:30,rew:80,sz:18,col:'#ffaa00',arm:20,
+    abil:{spawn:{cd:6,type:'fast',n:5}}
   },
+  splitter:{name:'CELL DIVISION',hp:1000,spd:52,rew:45,sz:14,col:'#00ff44',arm:10,
+    desc:'A biological anomaly that splits into two smaller units upon death.'
+  },
+  splitter_mini:{name:'SPLIT COMPONENT',hp:500,spd:78,rew:15,sz:7,col:'#88ffaa',arm:0},
   // ── MEDIUM SPECIALS ─────────────────────────────────────────────
-  aegis:{name:'AEGIS DRONE',hp:2000,spd:40,rew:120,sz:15,col:'#aaaaaa',arm:40,
-    abil:{shield:{cd:12,dur:4,absorb:400}}
+  aegis:{name:'AEGIS DRONE',hp:3500,spd:40,rew:120,sz:15,col:'#aaaaaa',arm:40,
+    abil:{shield:{cd:12,dur:4,absorb:2000}}
   },
-  jammer:{name:'EMP CRUISER',hp:1200,spd:65,rew:90,sz:13,col:'#ff00aa',arm:15,
+  jammer:{name:'EMP CRUISER',hp:2000,spd:65,rew:90,sz:13,col:'#ff00aa',arm:15,
     abil:{emp:{cd:15,range:1.8,dur:2}}
   },
   // ── SPECIAL FINAL BOSSES ────────────────────────────────────────
-  phantom:{name:'PHANTOM LORD',hp:9000,spd:35,rew:800,sz:26,col:'#44ffcc',arm:45,
+  phantom:{name:'PHANTOM LORD',hp:9000,spd:35,rew:800,sz:26,col:'#44ffcc',arm:45,immS:true,
     // Abilities: phase shift (invulnerable), teleport forward, spawn ghosts
     abil:{phase:{cd:8,dur:2.5},tele:{cd:12,dist:120},spawn:{cd:15,type:'fast',n:3}}
   },
-  omega:{name:'OMEGA CORE',hp:16000,spd:22,rew:1500,sz:30,col:'#ff8800',arm:65,
+  omega:{name:'OMEGA CORE',hp:16000,spd:22,rew:1500,sz:30,col:'#ff8800',arm:65,immS:true,
     // Abilities: regen HP, shield absorb, EMP disable towers
     abil:{regen:{rate:80},shield:{cd:10,dur:4,absorb:800},emp:{cd:18,range:3,dur:3}}
   },
-  oblivion:{name:'OBLIVION ENGINE',hp:35000,spd:18,rew:2500,sz:36,col:'#ff1133',arm:75,
+  oblivion:{name:'OBLIVION ENGINE',hp:35000,spd:18,rew:2500,sz:36,col:'#ff1133',arm:75,immS:true,
     // Abilities: rapid dash forward, spawn tanks
     abil:{dash:{cd:12,dur:1.5,mul:3.5},spawn:{cd:14,type:'tank',n:3}}
   },
-  hr_juggernaut:{name:'JUGGERNAUT',hp:5000,spd:15,rew:60,sz:18,col:'#aa3322',arm:85},
-  hr_specter:{name:'SPECTER',hp:1500,spd:70,rew:45,sz:11,col:'#ccffaa',arm:10,abil:{phase:{cd:6,dur:2}}},
-  hr_mutant:{name:'MUTANT',hp:3500,spd:35,rew:50,sz:14,col:'#88ff22',arm:20,abil:{regen:{rate:150}}},
 };
 
 // Wave data shared for both modes (first 20 = Casual, all 30 = Medium)
@@ -633,15 +703,17 @@ const WAVES_ALL=[
   [{t:'basic',n:35,iv:.33},{t:'aegis',n:3,iv:3,d:5},{t:'fast',n:35,iv:.26,d:8},{t:'tank',n:16,iv:.65,d:10},{t:'boss',n:5,iv:5,d:18},{t:'hr_specter',n:5,iv:.5,d:15}],
   [{t:'fast',n:40,iv:.25},{t:'jammer',n:3,iv:3,d:4},{t:'boss',n:6,iv:5,d:10},{t:'hr_mutant',n:4,iv:1.2,d:12},{t:'necro',n:1,iv:1,d:15}],
   [{t:'basic',n:40,iv:.3},{t:'tank',n:18,iv:.6,d:8},{t:'aegis',n:4,iv:2.5,d:12},{t:'boss',n:5,iv:4.5,d:15}],
-  [{t:'fast',n:40,iv:.22},{t:'jammer',n:4,iv:2.5,d:6},{t:'tank',n:20,iv:.55,d:5},{t:'boss',n:6,iv:4,d:15},{t:'hr_juggernaut',n:3,iv:2,d:10},{t:'runner_boss',n:1,iv:1,d:20}],
+  [{t:'fast',n:40,iv:.22},{t:'jammer',n:4,iv:2.5,d:6},{t:'tank',n:20,iv:.55,d:5},{t:'boss',n:6,iv:4,d:15},{t:'hr_juggernaut',n:3,iv:2,d:10},{t:'runner_boss',n:1,iv:1,d:20},{t:'mystery_boss',n:1,iv:1,d:22}],
   [{t:'tank',n:20,iv:.5},{t:'aegis',n:5,iv:2,d:2},{t:'jammer',n:3,iv:3,d:8},{t:'boss',n:8,iv:4,d:15}],
   [{t:'basic',n:50,iv:.28},{t:'fast',n:50,iv:.2,d:6},{t:'aegis',n:6,iv:1.5,d:10},{t:'jammer',n:4,iv:2,d:10},{t:'boss',n:6,iv:3.5,d:16},{t:'omega',n:1,iv:1,d:30},{t:'necro',n:2,iv:5,d:10},{t:'mystery',n:4,iv:1,d:8}],
+
   // ── HARD ROCK EXTRA (31-35) ───────────────────────────────────────
-  [{t:'hr_specter',n:40,iv:.2},{t:'shifter',n:15,iv:.8,d:4},{t:'jammer',n:5,iv:2,d:8},{t:'hr_mutant',n:8,iv:2.5,d:10},{t:'runner_boss',n:2,iv:5,d:15}],
+  [{t:'hr_specter',n:40,iv:.2},{t:'shifter',n:15,iv:.8,d:4},{t:'jammer',n:5,iv:2,d:8},{t:'hr_mutant',n:8,iv:2.5,d:10},{t:'runner_boss',n:2,iv:5,d:15},{t:'mystery_boss',n:1,iv:5,d:20}],
   [{t:'basic',n:60,iv:.2},{t:'swarm',n:10,iv:2,d:4},{t:'hr_juggernaut',n:8,iv:1.5,d:6},{t:'boss',n:8,iv:3,d:10},{t:'necro',n:2,iv:4,d:12}],
-  [{t:'hr_mutant',n:25,iv:.5},{t:'aegis',n:10,iv:1.5,d:2},{t:'hr_specter',n:20,iv:.6,d:5},{t:'boss',n:6,iv:5,d:12},{t:'mystery',n:5,iv:.8,d:10}],
+  [{t:'hr_mutant',n:25,iv:.5},{t:'aegis',n:10,iv:1.5,d:2},{t:'hr_specter',n:20,iv:.6,d:5},{t:'boss',n:6,iv:5,d:12},{t:'mystery',n:5,iv:.8,d:10},{t:'mystery_boss',n:1,iv:1,d:15}],
   [{t:'fast',n:80,iv:.15},{t:'hr_juggernaut',n:12,iv:1.5,d:5},{t:'hr_mutant',n:15,iv:1.8,d:8},{t:'boss',n:6,iv:6,d:15},{t:'runner_boss',n:3,iv:3,d:12}],
-  [{t:'boss',n:15,iv:2.5},{t:'hr_specter',n:50,iv:.2,d:5},{t:'hr_juggernaut',n:12,iv:1,d:8},{t:'jammer',n:8,iv:1.5,d:10},{t:'oblivion',n:1,iv:1,d:25},{t:'necro',n:3,iv:6,d:5},{t:'mystery',n:8,iv:.5,d:10}],
+  [{t:'boss',n:15,iv:2.5},{t:'hr_specter',n:50,iv:.2,d:5},{t:'hr_juggernaut',n:12,iv:1,d:8},{t:'jammer',n:8,iv:1.5,d:10},{t:'oblivion',n:1,iv:1,d:25},{t:'necro',n:3,iv:6,d:5},{t:'mystery',n:8,iv:.5,d:10},{t:'mystery_boss',n:2,iv:10,d:12}],
+
 ];
 
 // ── UTILS ──────────────────────────────────────────────────────
@@ -681,7 +753,22 @@ class Projectile{
       for(let i=0;i<5;i++){const a=Math.random()*Math.PI*2,s=40+Math.random()*70;parts.push(new Particle(this.x,this.y,this.col,Math.cos(a)*s,Math.sin(a)*s,1.5+Math.random()*1.5,.2+Math.random()*.2))}
     }
   }
-  draw(cx){cx.save();cx.fillStyle=this.col;cx.shadowBlur=14;cx.shadowColor=this.col;cx.beginPath();cx.arc(this.x,this.y,this.sz,0,Math.PI*2);cx.fill();cx.restore()}
+  draw(cx){
+    cx.save();cx.fillStyle=this.col;cx.shadowBlur=this.sz*2;cx.shadowColor=this.col;
+    if(this.slowF && this.slowT && this.splash>0){
+      // Singularity projectile look
+      cx.translate(this.x,this.y);cx.rotate(Date.now()*.01);
+      cx.fillStyle='#000';cx.beginPath();cx.arc(0,0,this.sz,0,Math.PI*2);cx.fill();
+      cx.strokeStyle=this.col;cx.lineWidth=2;cx.beginPath();cx.arc(0,0,this.sz,0,Math.PI*2);cx.stroke();
+      for(let i=0;i<3;i++){
+        const a=i*Math.PI*2/3,r=this.sz*1.2;
+        cx.fillStyle=this.col;cx.beginPath();cx.arc(Math.cos(a)*r,Math.sin(a)*r,3,0,Math.PI*2);cx.fill();
+      }
+    } else {
+      cx.beginPath();cx.arc(this.x,this.y,this.sz,0,Math.PI*2);cx.fill();
+    }
+    cx.restore();
+  }
 }
 
 // ── ENEMY ──────────────────────────────────────────────────────
@@ -692,10 +779,10 @@ class Enemy{
     const hm=(typeof G!=='undefined'&&G&&G.hpMult)||1;
     const hp=Math.round(d.hp*hm);
     Object.assign(this,{type,name:d.name,hp,mhp:hp,bspd:d.spd,spd:d.spd,
-      rew:d.rew,sz:d.sz,col:d.col,arm:d.arm||0,
+      rew:d.rew,sz:d.sz,col:d.col,arm:d.arm||0,immS:d.immS||false,
       x:WPS[0].x,y:WPS[0].y,wi:1,
       dead:false,reached:false,rewarded:false,
-      st:0,sf:1,pt:Math.random()*Math.PI*2,ang:0});
+      st:0,sf:1,pt:Math.random()*Math.PI*2,ang:0,stunned:0});
     // Special ability state
     this.abil=d.abil?JSON.parse(JSON.stringify(d.abil)):null;
     if(this.abil){
@@ -716,8 +803,8 @@ class Enemy{
     }
   }
   slow(f,t){
-    // Phantom during phase is immune to slow
-    if(this.phasing)return;
+    // Phantom during phase is immune to slow, and final bosses are immune to slow
+    if(this.phasing || this.immS)return;
     if(f<this.sf||this.st<=0)this.sf=f;this.st=Math.max(this.st,t)
   }
   hurt(dmg){
@@ -757,7 +844,12 @@ class Enemy{
     // ── SPECIAL ABILITIES ─────────────────────────────────────
     if(this.abil)this._updateAbilities(dt);
     const wp=WPS[this.wi],dx=wp.x-this.x,dy=wp.y-this.y,d=Math.hypot(dx,dy);
-    this.ang=Math.atan2(dy,dx);const mv=this.spd*dt;
+    this.ang=Math.atan2(dy,dx);
+    if(this.stunned > 0) {
+      this.stunned -= dt;
+      return; 
+    }
+    const mv=this.spd*dt;
     if(d<=mv){this.x=wp.x;this.y=wp.y;this.wi++}else{this.x+=dx/d*mv;this.y+=dy/d*mv}
     this.pt+=dt*4;
   }
@@ -795,7 +887,7 @@ class Enemy{
         }
         // Teleport particles
         if(typeof G!=='undefined'&&G){
-          for(let i=0;i<20;i++){const an=Math.random()*Math.PI*2,sp=60+Math.random()*100;G.parts.push(new Particle(this.x,this.y,'#44ffcc',Math.cos(an)*sp,Math.sin(an)*sp,2+Math.random()*3,.4+Math.random()*.3))}
+          for(let i=0;i<20;i++){const an=Math.random()*Math.PI*2,sp=60+Math.random()*100;G.parts.push(new Particle(this.x,this.y,'#44ffcc',Math.cos(an)*sp,Math.sin(an)*sp,2+Math.random()*3,.4+Math.random()*0.3))}
         }
       }
     }
@@ -875,6 +967,7 @@ class Enemy{
   }
   draw(cx){
     const s=this.sz,pulse=.9+Math.sin(this.pt)*.1;cx.save();
+    if(this.stunned > 0) cx.filter='grayscale(100%) brightness(1.5)';
     if(this.st>0){cx.strokeStyle='#4499ff';cx.lineWidth=2;cx.globalAlpha=.5;cx.beginPath();cx.arc(this.x,this.y,s+6,0,Math.PI*2);cx.stroke();cx.globalAlpha=1}
     cx.shadowBlur=12*pulse;cx.shadowColor=this.col;
     // ── PHANTOM LORD ─────────────────────────────────────────
@@ -1056,6 +1149,16 @@ class Enemy{
       cx.fillRect(-s,-s,s*2,s*2);
       cx.fillStyle='#000';cx.font='bold 12px Orbitron';cx.textAlign='center';cx.fillText('?',0,5);
       cx.restore();
+    // ── MYSTERY BOSS ──────────────────────────────────────────
+    }else if(this.type==='mystery_boss'){
+      cx.save();cx.translate(this.x,this.y);cx.rotate(this.pt*1.2);
+      const cols=['#00ffff','#ff00aa','#ffffff','#00e5ff'];
+      const c=cols[Math.floor((this.pt*4)%cols.length)];
+      cx.fillStyle=c;cx.shadowBlur=30;cx.shadowColor=c;
+      rrect(cx,-s,-s,s*2,s*2,4);cx.fill();
+      cx.strokeStyle='#fff';cx.lineWidth=2;cx.strokeRect(-s*.7,-s*.7,s*1.4,s*1.4);
+      cx.fillStyle='#000';cx.font='bold 20px Orbitron';cx.textAlign='center';cx.fillText('?',0,8);
+      cx.restore();
     // ── RUNNER BOSS / BOSS ───────────────────────────────────
     }else if(this.type==='runner_boss'||this.type==='boss'){
       cx.save();cx.translate(this.x,this.y);cx.rotate(this.type==='runner_boss'?this.ang:this.pt*.5);
@@ -1102,6 +1205,20 @@ class Tower{
     this.tgtMode=TDEFS[type].tgt||'first';
     this.cd=0;this.target=null;this.ang=-Math.PI/2;this.pt=Math.random()*Math.PI*2;this.fa=0;
     this.sell=Math.floor(TDEFS[type].cost*.65);
+    this.skillCD=0;this.skillTimer=0;
+  }
+  useSkill(){
+    if(this.type==='overclocker' && this.skillCD<=0){
+      this.skillCD=30;this.skillTimer=8;
+      if(typeof G!=='undefined') setSt('⚡ OVERDRIVE ACTIVATED: Area Fire Rate Surge!');
+      return true;
+    }
+    if(this.type==='kwera_wer' && this.skillCD<=0){
+      this.skillCD=40;this.skillTimer=5;
+      if(typeof G!=='undefined') setSt('🎨 MASTERPIECE IN PROGRESS: Enemies Stunned!');
+      return true;
+    }
+    return false;
   }
   get eff(){const b=TDEFS[this.type],m=LVM[this.level-1];return{...b,dmg:b.dmg*m.d,range:b.range*m.r,rate:b.rate*m.f,rpx:b.range*m.r*CELL}}
   get upCost(){if(this.level>=3)return null;return Math.floor(TDEFS[this.type].cost*UPC[this.level])}
@@ -1119,6 +1236,32 @@ class Tower{
   }
   update(dt,enemies,projs){
     this.pt+=dt*2;this.fa=Math.max(0,this.fa-dt*4);
+    if(this.type==='overclocker'){
+      this.skillCD=Math.max(0,this.skillCD-dt);
+      this.skillTimer=Math.max(0,this.skillTimer-dt);
+      if(this.skillTimer > 0 && Math.random() > 0.7 && typeof G!=='undefined') {
+        const an=Math.random()*Math.PI*2, sp=30+Math.random()*20;
+        G.parts.push(new Particle(this.x,this.y,'#00ffff',Math.cos(an)*sp,Math.sin(an)*sp,1.5+Math.random()*1.5,.3+Math.random()*.2));
+      }
+    }
+    if(this.type==='kwera_wer'){
+      this.skillCD=Math.max(0,this.skillCD-dt);
+      this.skillTimer=Math.max(0,this.skillTimer-dt);
+      if(this.skillTimer > 0) {
+        // Rainbow effect & Stun logic
+        if(Math.random() > 0.6 && typeof G!=='undefined') {
+          const an=Math.random()*Math.PI*2, sp=40+Math.random()*30;
+          const cols=['#ff0000','#00ff00','#0000ff','#ffff00','#ff00ff','#00ffff'];
+          G.parts.push(new Particle(this.x,this.y,cols[Math.floor(Math.random()*cols.length)],Math.cos(an)*sp,Math.sin(an)*sp,2,0.4));
+        }
+        if(typeof G!=='undefined' && G.enemies) {
+          const r = this.eff.rpx;
+          for(const e of G.enemies) {
+            if(D(this, e) < r) { e.stunned = 0.5; }
+          }
+        }
+      }
+    }
     if(this.type==='farm'){
       if(typeof G!=='undefined'&&G&&!G.wm.active)return;
       this.cd=Math.max(0,this.cd-dt);
@@ -1135,12 +1278,16 @@ class Tower{
       }
       return;
     }
-    this.cd=Math.max(0,this.cd-dt);
+    const br = this.bonusRate || 1.0;
+    const bd = this.bonusDmg || 1.0;
+    this.cd=Math.max(0,this.cd-dt*br);
     if(!this.target||this.target.dead||this.target.reached||D(this,this.target)>this.eff.rpx)this.target=this._target(enemies);
     if(this.target&&this.cd<=0){
       this.ang=Math.atan2(this.target.y-this.y,this.target.x-this.x);
-      const e=this.eff;this.cd=1/e.rate;this.fa=1;
-      projs.push(new Projectile(this.x,this.y,this.target,e,e.splash||0));
+      const e=this.eff;this.cd=1/(e.rate * br);this.fa=1;
+      const proj = new Projectile(this.x,this.y,this.target,e,e.splash||0);
+      proj.dmg *= bd; // Apply Damage Buff
+      projs.push(proj);
     }
   }
   draw(cx){
@@ -1149,6 +1296,70 @@ class Tower{
       cx.save();cx.strokeStyle=e.col;cx.lineWidth=1;cx.globalAlpha=.2;cx.setLineDash([4,6]);
       cx.beginPath();cx.arc(this.x,this.y,e.rpx,0,Math.PI*2);cx.stroke();cx.setLineDash([]);
       cx.globalAlpha=.06;cx.fillStyle=e.col;cx.beginPath();cx.arc(this.x,this.y,e.rpx,0,Math.PI*2);cx.fill();cx.restore();
+    }
+    if(this.type==='overclocker'){
+      const isAct = this.skillTimer > 0;
+      const curCol = isAct ? '#00ffff' : e.col;
+      cx.save();cx.shadowBlur=isAct ? 30 : 15+fa*20;cx.shadowColor=curCol;
+      cx.fillStyle='rgba(10,10,26,.95)';cx.strokeStyle=curCol;cx.lineWidth=this.selected?2.5:1.5;
+      rrect(cx,this.x-20,this.y-20,40,40,5);cx.fill();cx.stroke();
+      cx.translate(this.x,this.y);
+      // Pulsing ring
+      cx.strokeStyle=curCol;cx.lineWidth=isAct?4:3;cx.globalAlpha=0.6+Math.sin(this.pt*5)*0.3;
+      cx.beginPath();cx.arc(0,0,15,0,Math.PI*2);cx.stroke();
+      // Orbiting bits
+      for(let i=0;i<3;i++){
+        const a=this.pt*(isAct?8:4)+i*Math.PI*2/3;
+        cx.fillStyle='#fff';cx.beginPath();cx.arc(Math.cos(a)*15,Math.sin(a)*15,3,0,Math.PI*2);cx.fill();
+      }
+      // Energy core
+      cx.fillStyle=curCol;cx.beginPath();cx.arc(0,0,8,0,Math.PI*2);cx.fill();
+      cx.restore();
+      
+      // Cooldown Bar
+      if(this.skillCD > 0) {
+        const bw=30, bh=3, bx=this.x-bw/2, by=this.y-28;
+        cx.fillStyle='rgba(0,0,0,0.5)';cx.fillRect(bx,by,bw,bh);
+        cx.fillStyle='#ffa500';cx.fillRect(bx,by,bw*(1-this.skillCD/30),bh);
+      }
+      return;
+    }
+    if(this.type==='singularity'){
+      cx.save();cx.shadowBlur=20;cx.shadowColor=e.col;
+      cx.fillStyle='rgba(10,10,26,.95)';cx.strokeStyle=e.col;cx.lineWidth=this.selected?2.5:1.5;
+      rrect(cx,this.x-22,this.y-22,44,44,8);cx.fill();cx.stroke();
+      cx.translate(this.x,this.y);cx.rotate(this.ang);
+      // Black hole visuals
+      cx.fillStyle='#000';cx.beginPath();cx.arc(0,0,14,0,Math.PI*2);cx.fill();
+      cx.strokeStyle=e.col;cx.lineWidth=2;cx.beginPath();cx.arc(0,0,14,0,Math.PI*2);cx.stroke();
+      // Swirling event horizon
+      for(let i=0;i<4;i++){
+        const a=this.pt*6+i*Math.PI/2,r2=14+Math.sin(this.pt*10+i)*3;
+        cx.fillStyle=e.col;cx.beginPath();cx.arc(Math.cos(a)*r2,Math.sin(a)*r2,4,0,Math.PI*2);cx.fill();
+      }
+      cx.restore();
+      return;
+    }
+    if(this.type==='kwera_wer'){
+      const isAct=this.skillTimer>0;
+      cx.save();cx.translate(this.x,this.y);
+      cx.shadowBlur=isAct?40:20;cx.shadowColor=isAct?'#fff':'#ff00ff';
+      // Brush Handle
+      cx.fillStyle='#442211';cx.fillRect(-4,-22,8,30);
+      // Brush Head (Rainbow)
+      const t=Date.now()*0.005;
+      cx.fillStyle=`hsl(${t*50%360},100%,70%)`;
+      cx.beginPath();cx.moveTo(-8,8);cx.quadraticCurveTo(0,25,8,8);cx.fill();
+      // Aura Ring
+      cx.strokeStyle=`hsl(${(t*50+180)%360},100%,70%)`;cx.lineWidth=2;cx.setLineDash([5,5]);
+      cx.beginPath();cx.arc(0,0,20+Math.sin(t)*5,0,Math.PI*2);cx.stroke();
+      cx.restore();
+      if(this.skillCD > 0) {
+        const bw=30, bh=3, bx=this.x-bw/2, by=this.y-35;
+        cx.fillStyle='rgba(0,0,0,0.5)';cx.fillRect(bx,by,bw,bh);
+        cx.fillStyle='#ff00ff';cx.fillRect(bx,by,bw*(1-this.skillCD/40),bh);
+      }
+      return;
     }
     if(this.type==='farm'){
       cx.save();cx.shadowBlur=15+fa*20;cx.shadowColor=e.col;
@@ -1231,6 +1442,13 @@ class WaveManager{
         else if(d==='hardrock') n=1+Math.floor((w-17)/10);
         for(let i=0;i<n;i++)this.queue.push({t:'necro',at:8+Math.random()*12});
       }
+      
+      // Splitter injection (Wave 7+)
+      if(w>=7){
+        let n=Math.floor((w-5)/2); if(n<1) n=1;
+        if(d==='casual') n = Math.ceil(n/2);
+        for(let i=0;i<n;i++)this.queue.push({t:'splitter',at:4+Math.random()*18});
+      }
     }
     
     this.queue.sort((a,b)=>a.at-b.at);this.timer=0;this.active=true;this.spawned=false;this.idx++;return true;
@@ -1290,6 +1508,32 @@ class Game{
       if(cur!==prev)setSt(`Next wave in ${cur||'0'}s... (click NEXT WAVE to skip)`);
       if(this.autoTimer<=0){this.autoTimer=0;hideWBtn();this.wm.launch();setSt('Wave '+this.wm.idx+' of '+this.wm.total+' incoming!');hud()}
     }
+
+    // Update Tower Buffs
+    this.towers.forEach(t=>{ t.bonusRate=1.0; t.bonusDmg=1.0; });
+    for(const t of this.towers){
+      if(t.type==='overclocker'){
+        const e=t.eff;
+        const r=e.rpx;
+        // Passive: Lv1=15%, Lv2=20%, Lv3=25%
+        const passive = 0.10 + (t.level * 0.05); 
+        const active = (t.skillTimer > 0) ? 0.30 : 0;
+        const totalBonus = Math.min(0.55, passive + active);
+        
+        for(const t2 of this.towers){
+          if(t===t2)continue;
+          if(D(t,t2)<=r) t2.bonusRate=Math.max(t2.bonusRate, 1.0 + totalBonus);
+        }
+      }
+      if(t.type==='kwera_wer'){
+        const r=t.eff.rpx;
+        for(const t2 of this.towers){
+          if(t===t2)continue;
+          if(D(t,t2)<=r) t2.bonusDmg=Math.max(t2.bonusDmg, 1.25);
+        }
+      }
+    }
+
     const ne=this.wm.update(dt);this.enemies.push(...ne);
     for(const e of this.enemies){
       if(!e.dead&&!e.reached)e.update(dt);
@@ -1306,11 +1550,27 @@ class Game{
         recordKill(e.type);
         for(let i=0;i<10;i++){const a=Math.random()*Math.PI*2,s=50+Math.random()*100;this.parts.push(new Particle(e.x,e.y,e.col,Math.cos(a)*s,Math.sin(a)*s,2+Math.random()*2,.35+Math.random()*.35))}
         hud();
+        if(e.type==='splitter'){
+           for(let i=0;i<2;i++){
+             const ne=new Enemy('splitter_mini');
+             ne.x=e.x+(Math.random()-0.5)*10;
+             ne.y=e.y+(Math.random()-0.5)*10;
+             ne.wi=e.wi;
+             toSpawn.push(ne);
+           }
+           setSt('🧬 Splitter divided into 2 mini-units!');
+        }
         if(e.type==='mystery'){
            const types=['basic','fast','tank','shifter','boss','swarm'];
            const nt=types[Math.floor(Math.random()*types.length)];
            const ne=new Enemy(nt);ne.x=e.x;ne.y=e.y;ne.wi=e.wi;toSpawn.push(ne);
            setSt('❓ Mystery Unit revealed: '+ne.name+'!');
+        }
+        if(e.type==='mystery_boss'){
+           const types=['runner_boss','hr_juggernaut','necro'];
+           const nt=types[Math.floor(Math.random()*types.length)];
+           const ne=new Enemy(nt);ne.x=e.x;ne.y=e.y;ne.wi=e.wi;toSpawn.push(ne);
+           setSt('🚨 Mystery Boss revealed a massive threat: '+ne.name+'!');
         }
       }
     }
@@ -1355,13 +1615,16 @@ class Game{
     cx.strokeStyle=`rgba(100,55,190,${gv})`;cx.lineWidth=22;cx.stroke();
     cx.strokeStyle=`rgba(140,75,255,${gv*.6})`;cx.lineWidth=4;cx.stroke();
     // Entry
+    const inY = WPS[0].y;
     cx.save();cx.fillStyle='#00ff88';cx.shadowBlur=14;cx.shadowColor='#00ff88';
-    cx.beginPath();cx.moveTo(8,115);cx.lineTo(32,125);cx.lineTo(8,135);cx.closePath();cx.fill();
-    cx.fillStyle='rgba(0,255,136,.6)';cx.font='bold 8px monospace';cx.textAlign='center';cx.fillText('IN',20,148);cx.restore();
+    cx.beginPath();cx.moveTo(8,inY-10);cx.lineTo(32,inY);cx.lineTo(8,inY+10);cx.closePath();cx.fill();
+    cx.fillStyle='rgba(0,255,136,.6)';cx.font='bold 8px monospace';cx.textAlign='center';cx.fillText('IN',20,inY+23);cx.restore();
     // Exit
+    const lastIdx = WPS.length - 1;
+    const outY = WPS[lastIdx].y;
     cx.save();cx.fillStyle='#ff4466';cx.shadowBlur=14;cx.shadowColor='#ff4466';
-    cx.beginPath();cx.moveTo(892,165);cx.lineTo(868,175);cx.lineTo(892,185);cx.closePath();cx.fill();
-    cx.fillStyle='rgba(255,68,102,.6)';cx.font='bold 8px monospace';cx.textAlign='center';cx.fillText('OUT',880,196);cx.restore();
+    cx.beginPath();cx.moveTo(892,outY-10);cx.lineTo(868,outY);cx.lineTo(892,outY+10);cx.closePath();cx.fill();
+    cx.fillStyle='rgba(255,68,102,.6)';cx.font='bold 8px monospace';cx.textAlign='center';cx.fillText('OUT',880,outY+21);cx.restore();
   }
   _drawHover(cx){
     if(!this.hover)return;const{c,r}=this.hover;
@@ -1382,8 +1645,16 @@ class Game{
       setSt('⚠️ MAX LIMIT REACHED (40/40 TOWERS)!');
       return false;
     }
+    if(this.selType==='kwera_wer' && this.towers.some(t=>t.type==='kwera_wer')){
+      setSt('⚠️ พลังระดับพระเจ้าวางได้เพียง 1 อันเท่านั้น!');
+      return false;
+    }
     if(this.selType==='farm'&&this.towers.filter(t=>t.type==='farm').length>=12){
       setSt('⚠️ MAX 12 CREDIT MINERS ALLOWED!');
+      return false;
+    }
+    if(this.selType==='overclocker'&&this.towers.filter(t=>t.type==='overclocker').length>=3){
+      setSt('⚠️ MAX 3 PHOTON OVERCLOCKERS ALLOWED!');
       return false;
     }
     const cost=TDEFS[this.selType].cost;if(this.gold<cost)return false;
@@ -1430,8 +1701,20 @@ class Game{
   }
 }
 
+
+
 // ── UI ─────────────────────────────────────────────────────────
 let G;
+
+function surrender(){
+  console.log("Surrender called, G state:", G ? G.state : "null");
+  if(!G) return;
+  if(confirm('คุณแน่ใจหรือไม่ว่าต้องการถอนตัวจากการต่อสู้? (จะได้รับ Credits ตามความก้าวหน้าปัจจุบัน)')){
+    G._over();
+  }
+}
+window.surrender = surrender;
+
 function hud(){
   if(!G)return;
   document.getElementById('vg').textContent=G.gold;
@@ -1439,7 +1722,41 @@ function hud(){
   document.getElementById('vs').textContent=G.score.toLocaleString();
   document.getElementById('vw').textContent=G.wm.idx+'/'+G.wm.total;
   const vt=document.getElementById('vt');if(vt)vt.textContent=G.towers.length+'/40';
-  if(G.selTw&&document.getElementById('sbi').style.display!=='none')showInfo(G.selTw);
+  if(G.selTw&&document.getElementById('sbi').style.display!=='none'){
+    // Pulse the select panel if active
+    updateInfoPanel();
+  }
+}
+function updateInfoPanel(){
+  if(!G||!G.selTw||document.getElementById('sbi').style.display==='none')return;
+  const tw=G.selTw, e=tw.eff;
+  // Stats
+  if(tw.type==='farm'){
+    const dmgEl=document.getElementById('idmg');
+    if(dmgEl) dmgEl.textContent='+ '+Math.floor(e.dmg)+'💰';
+  }else{
+    const dmgEl=document.getElementById('idmg');
+    if(dmgEl) dmgEl.textContent=Math.round(e.dmg*tw.bonusDmg)+(e.splash?' (AOE)':'');
+    const rtEl=document.getElementById('irt');
+    if(rtEl) rtEl.textContent=(e.rate*tw.bonusRate).toFixed(2)+'/s';
+  }
+  // Upgrade Button
+  const btn=document.getElementById('ibtu'),uc=tw.upCost;
+  if(uc!==null){
+    btn.textContent=`⬆ UPGRADE (${uc}💰)`;
+    btn.disabled=!G||G.gold<uc;
+  } else {
+    btn.textContent='✨ MAX LEVEL';
+    btn.disabled=true;
+  }
+  // Skill Button
+  const skBtn = document.getElementById('tw-sk-btn');
+  if(skBtn && (tw.type==='overclocker' || tw.type==='kwera_wer')) {
+    const cd = Math.ceil(tw.skillCD);
+    skBtn.disabled = cd > 0;
+    if(tw.type==='kwera_wer') skBtn.innerHTML = cd > 0 ? `⏳ MASTERPIECE CD (${cd}s)` : `🎨 PAINT MASTERPIECE (STUN)`;
+    else skBtn.innerHTML = cd > 0 ? `⏳ RECHARGING (${cd}s)` : `⚡ USE OVERDRIVE (+30% FR)`;
+  }
 }
 function setSt(m){document.getElementById('wstatus').textContent=m}
 function showWBtn(){document.getElementById('btnW').style.display='inline-block'}
@@ -1455,40 +1772,66 @@ function toggleSpeed(){
 }
 function showShop(){document.getElementById('sbshop').style.display='block';document.getElementById('sbi').style.display='none'}
 function showInfo(tw){
-  document.getElementById('sbshop').style.display='none';document.getElementById('sbi').style.display='flex';
+  if(!tw)return;
+  document.getElementById('sbshop').style.display='none';
+  document.getElementById('sbi').style.display='flex';
   const e=tw.eff;
-  document.getElementById('iname').textContent=e.name;document.getElementById('iname').style.color=e.col;
+  document.getElementById('iname').textContent=e.name;
+  document.getElementById('iname').style.color=e.col;
   document.getElementById('ilv').textContent='Lv. '+tw.level;
-  const dots=document.querySelectorAll('#idots .ld');
-  dots.forEach((d,i)=>{const on=i<tw.level;d.style.background=on?e.col:'rgba(255,255,255,.08)';d.style.boxShadow=on?`0 0 5px ${e.col}`:''});
   
+  const dots=document.querySelectorAll('#idots .ld');
+  dots.forEach((d,i)=>{
+    const on=i<tw.level;
+    d.style.background=on?e.col:'rgba(255,255,255,.08)';
+    d.style.boxShadow=on?`0 0 5px ${e.col}`:'';
+  });
+
   if(tw.type==='farm'){
     document.getElementById('tgt-wrap').style.display='none';
     document.getElementById('idmg').parentElement.innerHTML='<span class="sl2">⛏️ Income</span><span class="sv" id="idmg"></span>';
-    document.getElementById('idmg').textContent='+ '+Math.floor(e.dmg)+'💰';
     document.getElementById('irng').parentElement.style.display='none';
     document.getElementById('irt').parentElement.innerHTML='<span class="sl2">⏳ Delay</span><span class="sv" id="irt"></span>';
     document.getElementById('irt').textContent=(1/e.rate).toFixed(1)+'s';
   }else{
     document.getElementById('tgt-wrap').style.display='block';
     document.getElementById('idmg').parentElement.innerHTML='<span class="sl2">⚔️ Damage</span><span class="sv" id="idmg"></span>';
-    document.getElementById('idmg').textContent=Math.round(e.dmg)+(e.splash?' (AOE)':'');
     document.getElementById('irng').parentElement.style.display='flex';
     document.getElementById('irt').parentElement.innerHTML='<span class="sl2">🔥 Fire Rate</span><span class="sv" id="irt"></span>';
     document.getElementById('irng').textContent=e.range.toFixed(1)+' cells';
-    document.getElementById('irt').textContent=e.rate.toFixed(2)+'/s';
   }
   
   document.getElementById('isl').textContent=tw.sell+'💰';
-  // targeting buttons
+  
+  const iacts=document.querySelector('.iacts');
+  const existingSk=document.getElementById('tw-sk-btn');
+  if(existingSk) existingSk.remove();
+
+  if(tw.type==='overclocker' || tw.type==='kwera_wer'){
+    const sk=document.createElement('button');
+    sk.id='tw-sk-btn'; sk.className='sk-btn';
+    if(tw.type==='kwera_wer') sk.classList.add('rainbow-border');
+    sk.onclick=()=>{
+      if(tw.useSkill()){
+        updateInfoPanel();
+      }
+    };
+    iacts.insertBefore(sk, iacts.firstChild);
+  }
+
+  // target mode UI
   ['first','last','strongest','random'].forEach(m=>{
     document.getElementById('tbt-'+m).classList.toggle('on',tw.tgtMode===m);
   });
-  const btn=document.getElementById('ibtu'),uc=tw.upCost;
-  if(uc!==null){btn.textContent=`⬆ UPGRADE (${uc}💰)`;btn.disabled=!G||G.gold<uc}
-  else{btn.textContent='✨ MAX LEVEL';btn.disabled=true}
+  
+  updateInfoPanel();
 }
-function upgradeSelected(){if(G)G.upgrade()}
+function upgradeSelected(){
+  if(G) {
+    G.upgrade();
+    updateInfoPanel();
+  }
+}
 function sellSelected(){if(G)G.sell()}
 function closeInfo(){if(G)G._desel()}
 function setTgt(mode){
@@ -1514,12 +1857,14 @@ function isUnlocked(type){
   if(d.shopCost===0)return true; // default towers always unlocked
   return getUnlocks().includes(type);
 }
-function unlockTower(type){
+function unlockTower(type, free=false){
   const d=TDEFS[type];
   if(!d||isUnlocked(type))return false;
-  const cr=getCredits();
-  if(cr<d.shopCost)return false;
-  addCredits(-d.shopCost);
+  if(!free){
+    const cr=getCredits();
+    if(cr<d.shopCost)return false;
+    addCredits(-d.shopCost);
+  }
   const u=getUnlocks();u.push(type);saveUnlocks(u);
   return true;
 }
@@ -1553,7 +1898,8 @@ const ENEMY_DESCS={
   oblivion:'A massive war machine that surges forward with devastating speed and spawns heavy backup.',
   hr_juggernaut:'Hard Rock Exclusive: An immensely armored juggernaut that shrugs off most attacks.',
   hr_specter:'Hard Rock Exclusive: A ghostly spirit that moves at extreme speeds.',
-  hr_mutant:'Hard Rock Exclusive: A biological abomination with incredible regeneration.'
+  hr_mutant:'Hard Rock Exclusive: A biological abomination with incredible regeneration.',
+  mystery_boss:'A massive glitch in the system. Upon destruction, it unleashes a high-tier reality anomaly.'
 };
 
 function showBestiary(){
@@ -1595,7 +1941,7 @@ function renderBestiary(){
         if(parts.length)abilText=`<div class="bi-abil">${parts.join('<br>')}</div>`;
       }
       card.innerHTML=`
-        <div class="bi-em">${type==='boss'?'💀':type==='phantom'?'👻':type==='omega'?'🔥':type==='tank'?'🛡️':type==='fast'?'💨':type==='shifter'?'✨':type==='swarm'?'🦂':type==='aegis'?'🕋':type==='jammer'?'🛸':type==='oblivion'?'🦾':type==='necro'?'🧙':type==='runner_boss'?'🏎️':type==='mystery'?'❓':type==='hr_juggernaut'?'🧱':type==='hr_specter'?'👻':type==='hr_mutant'?'🧪':'👾'}</div>
+        <div class="bi-em">${type==='boss'?'💀':type==='phantom'?'👻':type==='omega'?'🔥':type==='tank'?'🛡️':type==='fast'?'💨':type==='shifter'?'✨':type==='swarm'?'🦂':type==='aegis'?'🕋':type==='jammer'?'🛸':type==='oblivion'?'🦾':type==='necro'?'🧙':type==='runner_boss'?'🏎️':type==='mystery'?'❓':type==='hr_juggernaut'?'🧱':type==='hr_specter'?'👻':type==='hr_mutant'?'🧪':type==='mystery_boss'?'💎':'👾'}</div>
         <div class="bi-nm" style="color:${d.col}">${d.name}</div>
         <div class="bi-desc">${ENEMY_DESCS[type]||d.name}</div>
         <div class="bi-stats">
@@ -1706,9 +2052,12 @@ function renderShopGrid(){
   const grid=document.getElementById('shop-grid');
   grid.innerHTML='';
   
-  const starter=[], inter=[];
+  const starter=[], inter=[], adv=[], admin=[];
   for(const[type,d]of Object.entries(TDEFS)){
-    if(d.shopCost===0) starter.push({type,d});
+    if(d.isSecret && !isUnlocked(type)) continue;
+    if(type==='kwera_wer') admin.push({type,d});
+    else if(d.shopCost===0) starter.push({type,d});
+    else if(type==='overclocker' || type==='singularity') adv.push({type,d});
     else inter.push({type,d});
   }
 
@@ -1726,6 +2075,7 @@ function renderShopGrid(){
       const canAfford=getCredits()>=d.shopCost;
       const card=document.createElement('div');
       card.className='shop-card'+(owned&&!isDefault?' owned':'')+(isDefault?' default-tower':'');
+      if(type==='kwera_wer') card.classList.add('rainbow-border');
       card.style.setProperty('--card-col',d.col);
       let btnClass,btnText;
       if(isDefault){btnClass='is-default';btnText='⚡ DEFAULT TOWER'}
@@ -1751,6 +2101,8 @@ function renderShopGrid(){
 
   renderSection(starter,'Starter Towers','');
   renderSection(inter,'Intermediate Towers','cat-inter');
+  renderSection(adv,'Advance Towers','cat-advance');
+  renderSection(admin,'👑 Admin Tower','shop-cat-admin');
   // bind buy buttons
   grid.querySelectorAll('.sc-buy.can-buy').forEach(btn=>{
     btn.addEventListener('click',()=>{
@@ -1789,7 +2141,11 @@ let activeLoadout=[];
 
 function showLoadout(diff){
   pendingDiff=diff;
-  const unlocked=Object.keys(TDEFS).filter(t=>isUnlocked(t));
+  const unlocked=Object.keys(TDEFS).filter(t=>{
+    const d=TDEFS[t];
+    if(d.isSecret && !isUnlocked(t)) return false;
+    return isUnlocked(t);
+  });
   let saved=null;
   try{saved=JSON.parse(localStorage.getItem('neonTDLoadout'))}catch(e){}
   if(saved&&Array.isArray(saved)&&saved.length>0&&saved.every(t=>unlocked.includes(t))){
@@ -1845,8 +2201,41 @@ function launchFromLoadout(){
   if(activeLoadout.length===0)return;
   localStorage.setItem('neonTDLoadout',JSON.stringify(activeLoadout));
   document.getElementById('scr-loadout').style.display='none';
-  startGame(pendingDiff);
+  showMapSelect();
 }
+
+// ── MAP SELECTION ─────────────────────────────────────────────
+let pendingMapIdx = 0;
+function showMapSelect(){
+  document.getElementById('scr-loadout').style.display='none';
+  document.getElementById('scr-map').style.display='flex';
+  renderMapGrid();
+}
+function backFromMap(){
+  document.getElementById('scr-map').style.display='none';
+  document.getElementById('scr-loadout').style.display='flex';
+}
+function renderMapGrid(){
+  const grid = document.getElementById('map-grid');
+  grid.innerHTML = '';
+  MAPS.forEach((m, i) => {
+    const card = document.createElement('div');
+    card.className = 'map-card';
+    card.innerHTML = `
+      <div class="mc-em">${m.em}</div>
+      <div class="mc-name">${m.name}</div>
+      <div class="mc-desc">${m.desc}</div>
+      <button class="mc-btn">DEPLOY HERE</button>
+    `;
+    card.onclick = () => selectMap(i);
+    grid.appendChild(card);
+  });
+}
+function selectMap(idx){
+  pendingMapIdx = idx;
+  startGame(pendingDiff, idx);
+}
+
 
 function buildCards(){
   const el=document.getElementById('tcards');el.innerHTML='';
@@ -1869,6 +2258,7 @@ function showMenu(){
   document.getElementById('scr-go').style.display='none';
   document.getElementById('scr-shop').style.display='none';
   document.getElementById('scr-loadout').style.display='none';
+  document.getElementById('scr-map').style.display='none';
   document.getElementById('scr-bestiary').style.display='none';
   document.getElementById('scr-question').style.display='none';
   document.getElementById('topbar').style.display='none';
@@ -1889,12 +2279,15 @@ function closeHowTo(){
   document.getElementById('scr-htp').style.display='none';
   document.getElementById('scr-menu').style.display='flex';
 }
-function startGame(diff){
+function startGame(diff, mapIdx){
+  document.getElementById('scr-map').style.display='none';
   document.getElementById('scr-diff').style.display='none';
   document.getElementById('scr-go').style.display='none';
   document.getElementById('topbar').style.display='flex';
   document.getElementById('game-area').style.display='block';
   if(!G){G=new Game()}
+  // Initialize Map
+  initMap(mapIdx || 0);
   // Ensure selType is a valid loadout tower
   if(!activeLoadout.includes(G.selType))G.selType=activeLoadout[0]||'basic';
   buildCards();
@@ -1946,6 +2339,10 @@ function adminSubmit(){
       document.getElementById('adm-step2').style.display='block';
       document.getElementById('adm-msg').textContent='';
       document.getElementById('adm-cr').focus();
+    }else if(pw==='KwerAwer THE GOD OF ARTIST'){
+      unlockTower('kwera_wer', true);
+      closeAdmin();
+      showToast('🎨 ARTISTIC POWER UNLEASHED! KwerAwer Unlocked!');
     }else{
       document.getElementById('adm-msg').textContent='ACCESS DENIED: Invalid Passphrase.';
     }
