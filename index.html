@@ -118,6 +118,13 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
 .abb{color:rgba(150,180,255,.38);border-color:rgba(150,180,255,.14);font-size:.6rem}
 .abb:hover{background:rgba(255,255,255,.04)}
 #wstatus{margin-top:auto;padding:.6rem .7rem;font-size:.72rem;color:rgba(150,180,255,.38);border-top:1px solid rgba(255,255,255,.04);text-align:center;min-height:38px}
+/* TARGETING BUTTONS */
+.tgt-wrap{padding:.55rem .7rem;border-bottom:1px solid rgba(255,255,255,.04)}
+.tgt-lbl{font-family:'Orbitron',monospace;font-size:.55rem;letter-spacing:2px;color:rgba(150,180,255,.38);text-transform:uppercase;margin-bottom:.4rem}
+.tgt-btns{display:flex;gap:3px}
+.tbt{flex:1;padding:.3rem 0;font-family:'Orbitron',monospace;font-size:.55rem;font-weight:700;letter-spacing:.5px;cursor:pointer;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.2);color:rgba(150,180,255,.45);text-align:center;text-transform:uppercase;transition:all .18s;line-height:1.4}
+.tbt:hover{background:rgba(255,255,255,.06);color:var(--txtB)}
+.tbt.on{border-color:var(--acc);color:var(--acc);background:rgba(0,229,255,.1);box-shadow:0 0 6px rgba(0,229,255,.2)}
 
 /* GAME OVER */
 #scr-go{display:none;background:rgba(3,3,16,.93);backdrop-filter:blur(12px)}
@@ -130,9 +137,73 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
 .gsv{font-family:'Orbitron',monospace;color:var(--txtB)}
 .gobtns{display:flex;flex-direction:column;gap:.45rem;margin-top:1.4rem}
 
+/* SHOP SCREEN */
+#scr-shop{display:none;background:radial-gradient(ellipse 80% 60% at 50% 50%,#0d0828 0%,var(--bg) 100%)}
+.shop-inner{text-align:center;max-width:720px;width:96%;max-height:90vh;overflow-y:auto;padding:1rem}
+.shop-title{font-family:'Orbitron',monospace;font-size:1.6rem;font-weight:900;color:#cc88ff;text-shadow:0 0 25px rgba(200,130,255,.5),0 0 60px rgba(200,130,255,.25);letter-spacing:4px;margin-bottom:.3rem}
+.shop-sub{font-size:.78rem;letter-spacing:6px;color:rgba(200,160,255,.4);text-transform:uppercase;margin-bottom:.5rem}
+.shop-credits{font-family:'Orbitron',monospace;font-size:1rem;color:var(--gold);margin-bottom:1.5rem;text-shadow:0 0 12px rgba(255,215,0,.4)}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem}
+.shop-card{padding:1.2rem 1rem;border:2px solid rgba(255,255,255,.08);background:rgba(8,8,26,.9);transition:all .3s;position:relative;overflow:hidden}
+.shop-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--card-col,#cc88ff),transparent);opacity:0;transition:opacity .3s}
+.shop-card:hover::before{opacity:1}
+.shop-card:hover{border-color:rgba(255,255,255,.15);background:rgba(15,15,40,.95);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.shop-card.owned{border-color:rgba(0,255,136,.2);background:rgba(0,255,136,.03)}
+.shop-card.owned::after{content:'✓ OWNED';position:absolute;top:.6rem;right:.6rem;font-family:'Orbitron',monospace;font-size:.55rem;font-weight:700;letter-spacing:1px;color:var(--grn);padding:.15rem .4rem;border:1px solid rgba(0,255,136,.3);background:rgba(0,255,136,.08)}
+.shop-card.default-tower{border-color:rgba(0,229,255,.15);background:rgba(0,229,255,.03)}
+.shop-card.default-tower::after{content:'⚡ DEFAULT';position:absolute;top:.6rem;right:.6rem;font-family:'Orbitron',monospace;font-size:.55rem;font-weight:700;letter-spacing:1px;color:var(--acc);padding:.15rem .4rem;border:1px solid rgba(0,229,255,.2);background:rgba(0,229,255,.06)}
+.sc-emoji{font-size:2.2rem;margin-bottom:.5rem}
+.sc-name{font-family:'Orbitron',monospace;font-size:.88rem;font-weight:700;color:var(--txtB);margin-bottom:.3rem}
+.sc-desc{font-size:.72rem;color:rgba(150,180,255,.5);line-height:1.6;margin-bottom:.7rem;min-height:2.5em}
+.sc-stats{display:flex;flex-direction:column;gap:.2rem;margin-bottom:.8rem}
+.sc-stat{display:flex;justify-content:space-between;font-size:.68rem;padding:.15rem 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.sc-stat-l{color:rgba(150,180,255,.4)}
+.sc-stat-v{font-weight:700;color:var(--txtB);font-family:'Orbitron',monospace;font-size:.65rem}
+.sc-buy{width:100%;padding:.6rem .5rem;font-family:'Orbitron',monospace;font-size:.72rem;font-weight:700;letter-spacing:1.5px;cursor:pointer;border:2px solid;background:transparent;text-transform:uppercase;transition:all .25s}
+.sc-buy.can-buy{color:#cc88ff;border-color:#cc88ff}
+.sc-buy.can-buy:hover{background:rgba(200,130,255,.12);box-shadow:0 0 20px rgba(200,130,255,.3);transform:translateY(-1px)}
+.sc-buy.cant-buy{color:rgba(150,180,255,.3);border-color:rgba(150,180,255,.12);cursor:not-allowed}
+.sc-buy.is-owned{color:var(--grn);border-color:rgba(0,255,136,.25);cursor:default}
+.sc-buy.is-default{color:var(--acc);border-color:rgba(0,229,255,.2);cursor:default}
+.sc-cost-tag{font-size:.6rem;color:rgba(150,180,255,.35);margin-top:.3rem}
+.shop-back{margin-top:.5rem}
+/* Toast notification */
+.shop-toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);font-family:'Orbitron',monospace;font-size:.85rem;font-weight:700;padding:.8rem 2rem;border:2px solid var(--grn);background:rgba(0,255,136,.1);color:var(--grn);text-shadow:0 0 10px rgba(0,255,136,.5);letter-spacing:2px;z-index:999;opacity:0;transition:all .4s ease;pointer-events:none;backdrop-filter:blur(8px)}
+.shop-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* Locked tower overlay in sidebar */
+.twc.locked{opacity:.45;cursor:not-allowed;position:relative}
+.twc.locked::after{content:'🔒';position:absolute;right:.5rem;top:50%;transform:translateY(-50%);font-size:.85rem}
+
+/* LOADOUT SCREEN */
+#scr-loadout{display:none;background:radial-gradient(ellipse 80% 60% at 50% 50%,#0a0d28 0%,var(--bg) 100%)}
+.lo-inner{text-align:center;max-width:760px;width:96%;max-height:92vh;overflow-y:auto;padding:1rem}
+.lo-title{font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;color:var(--acc);text-shadow:0 0 25px rgba(0,229,255,.5);letter-spacing:4px;margin-bottom:.25rem}
+.lo-sub{font-size:.78rem;letter-spacing:5px;color:rgba(150,180,255,.4);text-transform:uppercase;margin-bottom:.4rem}
+.lo-counter{font-family:'Orbitron',monospace;font-size:.92rem;margin-bottom:1.2rem;color:var(--txtB);letter-spacing:1px}
+.lo-counter .lo-cnt{color:var(--acc);font-weight:900;font-size:1.1rem;text-shadow:0 0 8px rgba(0,229,255,.5)}
+.lo-counter .lo-full{color:var(--gold)}
+.lo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:.7rem;margin-bottom:1.2rem}
+.lo-card{padding:.9rem .7rem;border:2px solid rgba(255,255,255,.07);background:rgba(8,8,26,.9);cursor:pointer;transition:all .25s;text-align:center;position:relative}
+.lo-card:hover{border-color:rgba(255,255,255,.18);background:rgba(15,15,40,.95);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.35)}
+.lo-card.lo-picked{border-color:var(--acc);background:rgba(0,229,255,.08);box-shadow:0 0 18px rgba(0,229,255,.2)}
+.lo-card.lo-picked::after{content:'✓';position:absolute;top:.4rem;right:.5rem;font-family:'Orbitron',monospace;font-size:.7rem;font-weight:900;color:var(--acc);text-shadow:0 0 6px var(--acc)}
+.lo-card.lo-disabled{opacity:.32;cursor:not-allowed;pointer-events:none}
+.lo-em{font-size:1.8rem;margin-bottom:.3rem}
+.lo-nm{font-family:'Orbitron',monospace;font-size:.75rem;font-weight:700;color:var(--txtB);margin-bottom:.2rem}
+.lo-ds{font-size:.62rem;color:rgba(150,180,255,.45);line-height:1.5;margin-bottom:.4rem}
+.lo-cost{font-family:'Orbitron',monospace;font-size:.68rem;font-weight:700;color:var(--gold)}
+.lo-go{width:280px;margin:.8rem auto 0;padding:.85rem 1.5rem;font-family:'Orbitron',monospace;font-size:.92rem;font-weight:900;letter-spacing:3px;cursor:pointer;border:2px solid var(--grn);background:transparent;color:var(--grn);text-transform:uppercase;transition:all .3s}
+.lo-go:hover:not(:disabled){background:rgba(0,255,136,.1);box-shadow:0 0 30px rgba(0,255,136,.35);transform:translateY(-2px)}
+.lo-go:disabled{opacity:.3;cursor:not-allowed;border-color:rgba(150,180,255,.2);color:rgba(150,180,255,.3)}
+.lo-diff-badge{display:inline-block;padding:.15rem .6rem;font-family:'Orbitron',monospace;font-size:.6rem;font-weight:700;letter-spacing:2px;border:1px solid;margin-bottom:.8rem}
+.lo-diff-casual{color:var(--grn);border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.06)}
+.lo-diff-medium{color:var(--gold);border-color:rgba(255,215,0,.3);background:rgba(255,215,0,.06)}
+
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:rgba(0,229,255,.25)}
 @keyframes ein{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
 .ein{animation:ein .3s ease both}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.shimmer{background:linear-gradient(90deg,transparent 30%,rgba(255,255,255,.05) 50%,transparent 70%);background-size:200% 100%;animation:shimmer 3s infinite}
 </style>
 </head>
 <body>
@@ -143,6 +214,7 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
     <h1 class="logo">⚡ NEON DEFENSE</h1>
     <div class="tagline">Tower Defense · Sci-Fi Edition</div>
     <button class="mbtn" onclick="showDiff()">▶ PLAY GAME</button>
+    <button class="mbtn" onclick="showShopScreen()" style="color:#cc88ff;border-color:#cc88ff">🛒 TOWER SHOP</button>
     <button class="mbtn mbtn-alt" onclick="showHowTo()">📖 HOW TO PLAY</button>
     <div style="margin-top:1.5rem;font-size:.82rem;color:rgba(150,180,255,.45);letter-spacing:1px">⚡ Total Credits: <span class="cr-val" id="menu-cr">0</span></div>
     <div style="margin-top:2rem;font-size:.7rem;letter-spacing:4px;color:rgba(0,229,255,.25);text-transform:uppercase">Created by <span style="color:rgba(0,229,255,.55);font-family:'Orbitron',monospace;font-weight:700">MOLARIX</span></div>
@@ -155,7 +227,7 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
     <h1 class="logo" style="font-size:1.8rem;margin-bottom:.4rem">⚡ NEON DEFENSE</h1>
     <div class="diff-title">Select Difficulty</div>
     <div class="diff-cards">
-      <div class="dcard dcard-casual" onclick="startGame('casual')">
+      <div class="dcard dcard-casual" onclick="showLoadout('casual')">
         <div class="dcard-icon">🌿</div>
         <div class="dcard-name">CASUAL</div>
         <div class="dcard-desc">Relaxed experience, more gold &amp; lives. Perfect for new players.</div>
@@ -167,7 +239,7 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
           <div class="dstat"><span>Wave Bonus</span><span class="dstat-v">+50💰</span></div>
         </div>
       </div>
-      <div class="dcard dcard-medium" onclick="startGame('medium')">
+      <div class="dcard dcard-medium" onclick="showLoadout('medium')">
         <div class="dcard-icon">⚔️</div>
         <div class="dcard-name">MEDIUM</div>
         <div class="dcard-desc">Harder &amp; longer. 30 waves of escalating chaos with brutal final boss rushes.</div>
@@ -181,6 +253,19 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
       </div>
     </div>
     <button class="mbtn mbtn-alt" style="width:200px" onclick="showMenu()">↩ BACK</button>
+  </div>
+</div>
+
+<!-- LOADOUT SELECT -->
+<div id="scr-loadout" class="screen">
+  <div class="lo-inner ein">
+    <div class="lo-title">⚔️ SELECT LOADOUT</div>
+    <div class="lo-sub">Choose Your Arsenal</div>
+    <div id="lo-diff-badge"></div>
+    <div class="lo-counter">Towers Selected: <span class="lo-cnt" id="lo-cnt">0</span> / <span>5</span></div>
+    <div class="lo-grid" id="lo-grid"></div>
+    <button class="lo-go" id="lo-go-btn" disabled onclick="launchFromLoadout()">⚡ START BATTLE</button>
+    <button class="mbtn mbtn-alt" style="width:200px;margin-top:.6rem" onclick="backFromLoadout()">↩ BACK</button>
   </div>
 </div>
 
@@ -214,6 +299,18 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
     </div>
   </div>
 </div>
+
+<!-- SHOP SCREEN -->
+<div id="scr-shop" class="screen">
+  <div class="shop-inner ein">
+    <h1 class="shop-title">🛒 TOWER SHOP</h1>
+    <div class="shop-sub">Unlock New Weapons</div>
+    <div class="shop-credits">⚡ Credits: <span id="shop-cr">0</span></div>
+    <div class="shop-grid" id="shop-grid"></div>
+    <button class="mbtn mbtn-alt shop-back" onclick="closeShopScreen()">↩ BACK TO MENU</button>
+  </div>
+</div>
+<div class="shop-toast" id="shop-toast">🔓 TOWER UNLOCKED!</div>
 
 <!-- TOPBAR -->
 <div id="topbar">
@@ -255,6 +352,15 @@ h1.logo{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-w
           <div class="sr"><span class="sl2">🔥 Fire Rate</span><span class="sv" id="irt">—</span></div>
           <div class="sr"><span class="sl2">💰 Sell Value</span><span class="sv" id="isl">—</span></div>
         </div>
+        <div class="tgt-wrap">
+          <div class="tgt-lbl">🎯 Targeting</div>
+          <div class="tgt-btns">
+            <button class="tbt" id="tbt-first"  onclick="setTgt('first')"   >FIRST</button>
+            <button class="tbt" id="tbt-last"   onclick="setTgt('last')"    >LAST</button>
+            <button class="tbt" id="tbt-strongest" onclick="setTgt('strongest')">STR</button>
+            <button class="tbt" id="tbt-random" onclick="setTgt('random')"  >RAND</button>
+          </div>
+        </div>
         <div class="iacts">
           <button class="abt abu" id="ibtu" onclick="upgradeSelected()">UPGRADE</button>
           <button class="abt abs" onclick="sellSelected()">SELL TOWER</button>
@@ -284,10 +390,14 @@ seg(0,2,4,2);seg(4,2,4,8);seg(4,8,14,8);seg(14,3,14,8);seg(14,3,17,3);
 
 // Tower definitions
 const TDEFS={
-  basic:{name:'Ion Blaster',em:'⚡',cost:100,dmg:18,range:2.5,rate:1.0,col:'#00e5ff',pCol:'#00e5ff',pSpd:300,pSz:4,desc:'Balanced · fast fire rate',tgt:'first'},
-  sniper:{name:'Rail Gun',em:'🎯',cost:200,dmg:120,range:5.5,rate:0.35,col:'#ffff00',pCol:'#ffff00',pSpd:500,pSz:3,desc:'Long range · high damage',tgt:'strongest'},
-  aoe:{name:'Plasma Burst',em:'💥',cost:280,dmg:40,range:2.2,rate:0.5,splash:1.3,col:'#ff6600',pCol:'#ff8800',pSpd:200,pSz:8,desc:'Area of effect damage',tgt:'first'},
-  slow:{name:'Cryo Tower',em:'❄️',cost:175,dmg:6,range:2.5,rate:1.1,slowF:0.4,slowT:2.0,col:'#4499ff',pCol:'#88ccff',pSpd:250,pSz:5,desc:'Slows enemies · combo well',tgt:'first'},
+  basic:{name:'Ion Blaster',em:'⚡',cost:100,dmg:18,range:2.5,rate:1.0,col:'#00e5ff',pCol:'#00e5ff',pSpd:300,pSz:4,desc:'Balanced · fast fire rate',tgt:'first',shopCost:0},
+  sniper:{name:'Rail Gun',em:'🎯',cost:200,dmg:120,range:5.5,rate:0.35,col:'#ffff00',pCol:'#ffff00',pSpd:500,pSz:3,desc:'Long range · high damage',tgt:'strongest',shopCost:0},
+  aoe:{name:'Plasma Burst',em:'💥',cost:280,dmg:40,range:2.2,rate:0.5,splash:1.3,col:'#ff6600',pCol:'#ff8800',pSpd:200,pSz:8,desc:'Area of effect damage',tgt:'first',shopCost:0},
+  slow:{name:'Cryo Tower',em:'❄️',cost:175,dmg:6,range:2.5,rate:1.1,slowF:0.4,slowT:2.0,col:'#4499ff',pCol:'#88ccff',pSpd:250,pSz:5,desc:'Slows enemies · combo well',tgt:'first',shopCost:0},
+  laser:{name:'Laser Beam',em:'🔴',cost:320,dmg:55,range:3.5,rate:2.5,col:'#ff2266',pCol:'#ff4488',pSpd:600,pSz:2,desc:'Continuous beam · very fast',tgt:'first',shopCost:300},
+  tesla:{name:'Tesla Coil',em:'⚛️',cost:380,dmg:35,range:2.8,rate:0.8,splash:1.8,col:'#aa66ff',pCol:'#cc88ff',pSpd:450,pSz:6,desc:'Chain lightning · hits groups',tgt:'first',shopCost:500},
+  missile:{name:'Missile Pod',em:'🚀',cost:450,dmg:200,range:6.0,rate:0.2,splash:1.6,col:'#ff4400',pCol:'#ff6622',pSpd:180,pSz:10,desc:'Massive AOE · long range',tgt:'strongest',shopCost:750},
+  voidtw:{name:'Void Rift',em:'🌀',cost:260,dmg:12,range:3.0,rate:1.4,slowF:0.2,slowT:3.5,splash:1.5,col:'#8844cc',pCol:'#aa66ee',pSpd:200,pSz:7,desc:'Huge slow aura · area control',tgt:'first',shopCost:400},
 };
 const LVM=[{d:1,r:1,f:1},{d:1.7,r:1.25,f:1.15},{d:3.0,r:1.5,f:1.35}];
 const UPC=[0,0.65,1.0];
@@ -298,6 +408,15 @@ const EDEFS={
   fast:{name:'Runner',hp:65,spd:120,rew:22,sz:8,col:'#ffdd00',arm:0},
   tank:{name:'Titan',hp:480,spd:38,rew:50,sz:15,col:'#bb44ff',arm:15},
   boss:{name:'BOSS',hp:1500,spd:28,rew:250,sz:22,col:'#ff0066',arm:25},
+  // ── SPECIAL FINAL BOSSES ────────────────────────────────────────
+  phantom:{name:'PHANTOM LORD',hp:4500,spd:35,rew:800,sz:26,col:'#44ffcc',arm:30,
+    // Abilities: phase shift (invulnerable), teleport forward, spawn ghosts
+    abil:{phase:{cd:8,dur:2.5},tele:{cd:12,dist:120},spawn:{cd:15,type:'fast',n:3}}
+  },
+  omega:{name:'OMEGA CORE',hp:8000,spd:22,rew:1500,sz:30,col:'#ff8800',arm:50,
+    // Abilities: regen HP, shield absorb, EMP disable towers
+    abil:{regen:{rate:60},shield:{cd:10,dur:4,absorb:500},emp:{cd:18,range:3,dur:3}}
+  },
 };
 
 // Wave data shared for both modes (first 20 = Casual, all 30 = Medium)
@@ -322,7 +441,7 @@ const WAVES_ALL=[
   [{t:'fast',n:30,iv:.35},{t:'boss',n:3,iv:7,d:10}],
   [{t:'basic',n:25,iv:.45},{t:'fast',n:25,iv:.35,d:5},{t:'tank',n:12,iv:.9,d:10}],
   [{t:'tank',n:15,iv:.8},{t:'boss',n:4,iv:6,d:10}],
-  [{t:'basic',n:30,iv:.4},{t:'fast',n:30,iv:.3,d:5},{t:'tank',n:15,iv:.7,d:10},{t:'boss',n:5,iv:5,d:18}],
+  [{t:'basic',n:30,iv:.4},{t:'fast',n:30,iv:.3,d:5},{t:'tank',n:15,iv:.7,d:10},{t:'boss',n:3,iv:5,d:14},{t:'phantom',n:1,iv:1,d:28}],
   // ── MEDIUM EXTRA (21-30) ───────────────────────────────────────
   [{t:'basic',n:35,iv:.38},{t:'tank',n:14,iv:.9,d:8}],
   [{t:'fast',n:35,iv:.3},{t:'boss',n:4,iv:6.5,d:10}],
@@ -333,7 +452,7 @@ const WAVES_ALL=[
   [{t:'basic',n:40,iv:.3},{t:'tank',n:18,iv:.6,d:8},{t:'boss',n:5,iv:4.5,d:15}],
   [{t:'fast',n:40,iv:.22},{t:'tank',n:20,iv:.55,d:5},{t:'boss',n:6,iv:4,d:15}],
   [{t:'tank',n:20,iv:.5},{t:'boss',n:8,iv:4,d:0}],
-  [{t:'basic',n:50,iv:.28},{t:'fast',n:50,iv:.2,d:6},{t:'tank',n:20,iv:.48,d:12},{t:'boss',n:10,iv:3.5,d:20}],
+  [{t:'basic',n:50,iv:.28},{t:'fast',n:50,iv:.2,d:6},{t:'tank',n:20,iv:.48,d:12},{t:'boss',n:6,iv:3.5,d:16},{t:'omega',n:1,iv:1,d:30}],
 ];
 
 // ── UTILS ──────────────────────────────────────────────────────
@@ -388,27 +507,240 @@ class Enemy{
       x:WPS[0].x,y:WPS[0].y,wi:1,
       dead:false,reached:false,rewarded:false,
       st:0,sf:1,pt:Math.random()*Math.PI*2,ang:0});
+    // Special ability state
+    this.abil=d.abil?JSON.parse(JSON.stringify(d.abil)):null;
+    if(this.abil){
+      // Phase shift (phantom)
+      if(this.abil.phase){this.phaseCD=3;this.phasing=false;this.phaseTimer=0}
+      // Teleport (phantom)
+      if(this.abil.tele){this.teleCD=6}
+      // Spawn minions (phantom)
+      if(this.abil.spawn){this.spawnCD=8}
+      // Regen (omega)
+      if(this.abil.regen){this.regenAcc=0}
+      // Shield (omega)
+      if(this.abil.shield){this.shieldCD=5;this.shielding=false;this.shieldTimer=0;this.shieldHP=0}
+      // EMP (omega)
+      if(this.abil.emp){this.empCD=10;this.empFlash=0}
+      // Warning announced
+      this._warned=false;
+    }
   }
-  slow(f,t){if(f<this.sf||this.st<=0)this.sf=f;this.st=Math.max(this.st,t)}
-  hurt(dmg){this.hp=Math.max(0,this.hp-Math.max(1,dmg-this.arm));if(this.hp<=0)this.dead=true}
+  slow(f,t){
+    // Phantom during phase is immune to slow
+    if(this.phasing)return;
+    if(f<this.sf||this.st<=0)this.sf=f;this.st=Math.max(this.st,t)
+  }
+  hurt(dmg){
+    // Phantom phase shift = invulnerable
+    if(this.phasing)return;
+    // Omega shield absorbs damage first
+    if(this.shielding&&this.shieldHP>0){
+      const absorbed=Math.min(dmg,this.shieldHP);
+      this.shieldHP-=absorbed;
+      dmg-=absorbed;
+      if(this.shieldHP<=0)this.shielding=false;
+      if(dmg<=0)return;
+    }
+    this.hp=Math.max(0,this.hp-Math.max(1,dmg-this.arm));
+    if(this.hp<=0)this.dead=true;
+  }
   get prog(){
     let p=0;
     for(let i=1;i<this.wi&&i<WPS.length;i++){const a=WPS[i-1],b=WPS[i];p+=Math.hypot(b.x-a.x,b.y-a.y)}
     p-=D(this,WPS[Math.min(this.wi,WPS.length-1)]);return p;
   }
   update(dt){
+    // Warning message
+    if(this.abil&&!this._warned&&typeof G!=='undefined'&&G){
+      this._warned=true;
+      if(this.type==='phantom')setSt('⚠️ PHANTOM LORD APPROACHES! It can phase shift & teleport!');
+      if(this.type==='omega')setSt('⚠️ OMEGA CORE DETECTED! It regenerates, shields & disables towers!');
+    }
     this.st=Math.max(0,this.st-dt);if(this.st<=0)this.sf=1;this.spd=this.bspd*this.sf;
     if(this.wi>=WPS.length){this.reached=true;this.dead=true;return}
+    // ── SPECIAL ABILITIES ─────────────────────────────────────
+    if(this.abil)this._updateAbilities(dt);
     const wp=WPS[this.wi],dx=wp.x-this.x,dy=wp.y-this.y,d=Math.hypot(dx,dy);
     this.ang=Math.atan2(dy,dx);const mv=this.spd*dt;
     if(d<=mv){this.x=wp.x;this.y=wp.y;this.wi++}else{this.x+=dx/d*mv;this.y+=dy/d*mv}
     this.pt+=dt*4;
   }
+  _updateAbilities(dt){
+    const a=this.abil;
+    // ── PHANTOM: Phase Shift ──────────────────────────────────
+    if(a.phase){
+      if(this.phasing){
+        this.phaseTimer-=dt;
+        if(this.phaseTimer<=0)this.phasing=false;
+      }else{
+        this.phaseCD-=dt;
+        if(this.phaseCD<=0){
+          this.phasing=true;
+          this.phaseTimer=a.phase.dur;
+          this.phaseCD=a.phase.cd;
+          // Speed boost during phase
+          this.bspd=EDEFS[this.type].spd*1.8;
+        }else{
+          this.bspd=EDEFS[this.type].spd;
+        }
+      }
+    }
+    // ── PHANTOM: Teleport Forward ────────────────────────────
+    if(a.tele){
+      this.teleCD-=dt;
+      if(this.teleCD<=0&&this.wi<WPS.length){
+        this.teleCD=a.tele.cd;
+        // Teleport along path direction
+        const wp=WPS[this.wi];
+        const dx=wp.x-this.x,dy=wp.y-this.y,d=Math.hypot(dx,dy);
+        if(d>10){
+          const mv=Math.min(a.tele.dist,d-5);
+          this.x+=dx/d*mv;this.y+=dy/d*mv;
+        }
+        // Teleport particles
+        if(typeof G!=='undefined'&&G){
+          for(let i=0;i<20;i++){const an=Math.random()*Math.PI*2,sp=60+Math.random()*100;G.parts.push(new Particle(this.x,this.y,'#44ffcc',Math.cos(an)*sp,Math.sin(an)*sp,2+Math.random()*3,.4+Math.random()*.3))}
+        }
+      }
+    }
+    // ── PHANTOM: Spawn Ghosts ────────────────────────────────
+    if(a.spawn){
+      this.spawnCD-=dt;
+      if(this.spawnCD<=0&&typeof G!=='undefined'&&G){
+        this.spawnCD=a.spawn.cd;
+        for(let i=0;i<a.spawn.n;i++){
+          const e=new Enemy(a.spawn.type);
+          e.x=this.x+(Math.random()-0.5)*30;
+          e.y=this.y+(Math.random()-0.5)*30;
+          e.wi=this.wi;
+          G.enemies.push(e);
+        }
+        setSt('👻 Phantom Lord spawned ghost minions!');
+      }
+    }
+    // ── OMEGA: Regen ─────────────────────────────────────────
+    if(a.regen){
+      this.regenAcc+=a.regen.rate*dt;
+      if(this.regenAcc>=1){
+        const heal=Math.floor(this.regenAcc);
+        this.hp=Math.min(this.mhp,this.hp+heal);
+        this.regenAcc-=heal;
+      }
+    }
+    // ── OMEGA: Shield ────────────────────────────────────────
+    if(a.shield){
+      if(this.shielding){
+        this.shieldTimer-=dt;
+        if(this.shieldTimer<=0||this.shieldHP<=0)this.shielding=false;
+      }else{
+        this.shieldCD-=dt;
+        if(this.shieldCD<=0){
+          this.shielding=true;
+          this.shieldTimer=a.shield.dur;
+          this.shieldHP=a.shield.absorb;
+          this.shieldCD=a.shield.cd;
+        }
+      }
+    }
+    // ── OMEGA: EMP ───────────────────────────────────────────
+    if(a.emp){
+      this.empFlash=Math.max(0,this.empFlash-dt);
+      this.empCD-=dt;
+      if(this.empCD<=0&&typeof G!=='undefined'&&G){
+        this.empCD=a.emp.cd;
+        this.empFlash=0.6;
+        const r=a.emp.range*CELL;
+        for(const tw of G.towers){
+          if(D(this,tw)<=r){
+            tw.cd=Math.max(tw.cd,a.emp.dur); // disable tower for duration
+          }
+        }
+        setSt('⚡ OMEGA CORE EMP PULSE! Nearby towers disabled!');
+        // EMP particles
+        for(let i=0;i<30;i++){const an=Math.random()*Math.PI*2,sp=100+Math.random()*150;G.parts.push(new Particle(this.x,this.y,'#ff8800',Math.cos(an)*sp,Math.sin(an)*sp,3+Math.random()*3,.5+Math.random()*.3))}
+      }
+    }
+  }
   draw(cx){
     const s=this.sz,pulse=.9+Math.sin(this.pt)*.1;cx.save();
     if(this.st>0){cx.strokeStyle='#4499ff';cx.lineWidth=2;cx.globalAlpha=.5;cx.beginPath();cx.arc(this.x,this.y,s+6,0,Math.PI*2);cx.stroke();cx.globalAlpha=1}
     cx.shadowBlur=12*pulse;cx.shadowColor=this.col;
-    if(this.type==='boss'){
+    // ── PHANTOM LORD ─────────────────────────────────────────
+    if(this.type==='phantom'){
+      cx.save();cx.translate(this.x,this.y);
+      // Phase shift = ghostly transparent
+      if(this.phasing){cx.globalAlpha=0.2+Math.sin(this.pt*3)*0.15}
+      // Rotating triangle with inner eye
+      cx.rotate(this.pt*0.4);
+      cx.fillStyle=this.col;cx.shadowBlur=25;cx.shadowColor=this.col;
+      // Outer triangle
+      cx.beginPath();
+      for(let i=0;i<3;i++){const a=i/3*Math.PI*2-Math.PI/2;cx.lineTo(Math.cos(a)*s*1.5*pulse,Math.sin(a)*s*1.5*pulse)}
+      cx.closePath();cx.fill();
+      // Inner triangle (inverted, darker)
+      cx.fillStyle='rgba(0,20,20,.7)';cx.beginPath();
+      for(let i=0;i<3;i++){const a=i/3*Math.PI*2+Math.PI/2;cx.lineTo(Math.cos(a)*s*0.7,Math.sin(a)*s*0.7)}
+      cx.closePath();cx.fill();
+      // Center eye
+      cx.fillStyle='#ffffff';cx.shadowBlur=15;cx.shadowColor='#ffffff';
+      cx.beginPath();cx.arc(0,0,s*0.25,0,Math.PI*2);cx.fill();
+      cx.fillStyle=this.col;cx.beginPath();cx.arc(0,0,s*0.12,0,Math.PI*2);cx.fill();
+      // Ghostly trail particles
+      cx.globalAlpha=0.3;
+      for(let i=0;i<3;i++){
+        const a=this.pt*2+i*2.1,r2=s*0.8+Math.sin(a)*s*0.3;
+        cx.fillStyle=this.col;cx.beginPath();cx.arc(Math.cos(a)*r2,Math.sin(a)*r2,3,0,Math.PI*2);cx.fill();
+      }
+      cx.restore();
+    // ── OMEGA CORE ───────────────────────────────────────────
+    }else if(this.type==='omega'){
+      cx.save();cx.translate(this.x,this.y);
+      // EMP flash effect
+      if(this.empFlash>0){
+        cx.globalAlpha=this.empFlash;cx.fillStyle='#ff8800';cx.shadowBlur=60;cx.shadowColor='#ff8800';
+        cx.beginPath();cx.arc(0,0,this.abil.emp.range*CELL,0,Math.PI*2);cx.fill();
+        cx.globalAlpha=1;
+      }
+      // Shield aura
+      if(this.shielding){
+        cx.strokeStyle='#ffaa00';cx.lineWidth=3;cx.globalAlpha=0.5+Math.sin(this.pt*3)*0.2;
+        cx.setLineDash([8,4]);cx.beginPath();cx.arc(0,0,s*1.8,0,Math.PI*2);cx.stroke();cx.setLineDash([]);
+        cx.globalAlpha=0.15;cx.fillStyle='#ffaa00';cx.beginPath();cx.arc(0,0,s*1.8,0,Math.PI*2);cx.fill();
+        cx.globalAlpha=1;
+      }
+      // Regen aura (subtle green glow)
+      cx.globalAlpha=0.08+Math.sin(this.pt*2)*0.04;cx.fillStyle='#00ff88';
+      cx.beginPath();cx.arc(0,0,s*2,0,Math.PI*2);cx.fill();cx.globalAlpha=1;
+      // Main body - octagon
+      cx.fillStyle=this.col;cx.shadowBlur=30;cx.shadowColor=this.col;
+      cx.beginPath();
+      for(let i=0;i<8;i++){const a=i/8*Math.PI*2+this.pt*0.15;cx.lineTo(Math.cos(a)*s*1.3*pulse,Math.sin(a)*s*1.3*pulse)}
+      cx.closePath();cx.fill();
+      // Inner core - pulsing
+      cx.fillStyle='#ffcc00';cx.shadowBlur=20;cx.shadowColor='#ffcc00';
+      cx.beginPath();cx.arc(0,0,s*0.5*(.8+Math.sin(this.pt*2)*.2),0,Math.PI*2);cx.fill();
+      // Orbiting shield nodes
+      for(let i=0;i<4;i++){
+        const a=this.pt*0.8+i*Math.PI/2,r2=s*1.6;
+        const nx=Math.cos(a)*r2,ny=Math.sin(a)*r2;
+        cx.fillStyle=this.shielding?'#ffaa00':'#ff6600';cx.shadowBlur=10;cx.shadowColor=cx.fillStyle;
+        cx.beginPath();cx.arc(nx,ny,4,0,Math.PI*2);cx.fill();
+        // Connecting lines
+        cx.strokeStyle=cx.fillStyle;cx.lineWidth=1;cx.globalAlpha=0.3;
+        cx.beginPath();cx.moveTo(0,0);cx.lineTo(nx,ny);cx.stroke();cx.globalAlpha=1;
+      }
+      // HP regen sparkles
+      if(this.hp<this.mhp){
+        const sa=this.pt*3,sr=s*0.8;
+        cx.fillStyle='#00ff88';cx.globalAlpha=0.6;cx.shadowBlur=8;cx.shadowColor='#00ff88';
+        cx.beginPath();cx.arc(Math.cos(sa)*sr,Math.sin(sa)*sr,2.5,0,Math.PI*2);cx.fill();
+        cx.beginPath();cx.arc(Math.cos(sa+Math.PI)*sr,Math.sin(sa+Math.PI)*sr,2.5,0,Math.PI*2);cx.fill();
+        cx.globalAlpha=1;
+      }
+      cx.restore();
+    // ── REGULAR BOSS ─────────────────────────────────────────
+    }else if(this.type==='boss'){
       cx.save();cx.translate(this.x,this.y);cx.rotate(this.pt*.5);cx.fillStyle=this.col;
       cx.beginPath();cx.moveTo(0,-s*1.4*pulse);cx.lineTo(s*pulse,0);cx.lineTo(0,s*1.4*pulse);cx.lineTo(-s*pulse,0);cx.closePath();cx.fill();
       cx.fillStyle='rgba(255,255,255,.4)';cx.beginPath();cx.arc(0,0,s*.4,0,Math.PI*2);cx.fill();cx.restore();
@@ -422,9 +754,21 @@ class Enemy{
       cx.beginPath();cx.moveTo(s*.5,0);cx.lineTo(-s*.25,-s*.32);cx.lineTo(-s*.25,s*.32);cx.closePath();cx.fill();cx.restore();
     }
     cx.restore();
+    // Health bar
     const bw=s*2.8,bh=3,bx=this.x-bw/2,by=this.y-s-11,r=this.hp/this.mhp;
     cx.fillStyle='rgba(0,0,0,.7)';cx.fillRect(bx-1,by-1,bw+2,bh+2);
     cx.fillStyle=r>.6?'#00ff88':r>.25?'#ffcc00':'#ff3333';cx.fillRect(bx,by,bw*r,bh);
+    // Shield HP bar for Omega
+    if(this.shielding&&this.shieldHP>0&&this.abil&&this.abil.shield){
+      const sr=this.shieldHP/this.abil.shield.absorb;
+      cx.fillStyle='rgba(255,170,0,.4)';cx.fillRect(bx,by-5,bw*sr,2);
+    }
+    // Boss name label
+    if(this.type==='phantom'||this.type==='omega'){
+      cx.save();cx.font='bold 9px Orbitron,monospace';cx.textAlign='center';
+      cx.fillStyle=this.col;cx.shadowBlur=8;cx.shadowColor=this.col;
+      cx.fillText(this.name,this.x,this.y+s+16);cx.restore();
+    }
   }
 }
 
@@ -433,6 +777,7 @@ class Tower{
   constructor(col,row,type){
     this.col=col;this.row=row;this.x=col*CELL+CELL/2;this.y=row*CELL+CELL/2;
     this.type=type;this.level=1;this.selected=false;
+    this.tgtMode=TDEFS[type].tgt||'first';
     this.cd=0;this.target=null;this.ang=-Math.PI/2;this.pt=Math.random()*Math.PI*2;this.fa=0;
     this.sell=Math.floor(TDEFS[type].cost*.65);
   }
@@ -442,8 +787,12 @@ class Tower{
   _target(enemies){
     const e=this.eff,ok=enemies.filter(x=>!x.dead&&!x.reached&&D(this,x)<=e.rpx);
     if(!ok.length)return null;
-    if(e.tgt==='strongest')return ok.reduce((a,b)=>a.hp>b.hp?a:b);
-    return ok.reduce((a,b)=>a.prog>b.prog?a:b);
+    switch(this.tgtMode){
+      case 'last':     return ok.reduce((a,b)=>a.prog<b.prog?a:b);
+      case 'strongest':return ok.reduce((a,b)=>a.hp>b.hp?a:b);
+      case 'random':   return ok[Math.floor(Math.random()*ok.length)];
+      default:         return ok.reduce((a,b)=>a.prog>b.prog?a:b); // first
+    }
   }
   update(dt,enemies,projs){
     this.pt+=dt*2;this.cd=Math.max(0,this.cd-dt);this.fa=Math.max(0,this.fa-dt*4);
@@ -696,6 +1045,10 @@ function showInfo(tw){
   document.getElementById('irng').textContent=e.range.toFixed(1)+' cells';
   document.getElementById('irt').textContent=e.rate.toFixed(2)+'/s';
   document.getElementById('isl').textContent=tw.sell+'💰';
+  // targeting buttons
+  ['first','last','strongest','random'].forEach(m=>{
+    document.getElementById('tbt-'+m).classList.toggle('on',tw.tgtMode===m);
+  });
   const btn=document.getElementById('ibtu'),uc=tw.upCost;
   if(uc!==null){btn.textContent=`⬆ UPGRADE (${uc}💰)`;btn.disabled=!G||G.gold<uc}
   else{btn.textContent='✨ MAX LEVEL';btn.disabled=true}
@@ -703,9 +1056,97 @@ function showInfo(tw){
 function upgradeSelected(){if(G)G.upgrade()}
 function sellSelected(){if(G)G.sell()}
 function closeInfo(){if(G)G._desel()}
+function setTgt(mode){
+  if(!G||!G.selTw)return;
+  G.selTw.tgtMode=mode;
+  G.selTw.target=null; // reset current target immediately
+  ['first','last','strongest','random'].forEach(m=>{
+    document.getElementById('tbt-'+m).classList.toggle('on',m===mode);
+  });
+}
 // ── CREDITS ────────────────────────────────────────────────────
 function getCredits(){return parseInt(localStorage.getItem('neonTDCr')||'0')}
 function addCredits(n){const t=getCredits()+n;localStorage.setItem('neonTDCr',t);return t}
+
+// ── UNLOCKS ────────────────────────────────────────────────────
+function getUnlocks(){
+  try{return JSON.parse(localStorage.getItem('neonTDUnlocks')||'[]')}catch(e){return[]}
+}
+function saveUnlocks(arr){localStorage.setItem('neonTDUnlocks',JSON.stringify(arr))}
+function isUnlocked(type){
+  const d=TDEFS[type];
+  if(!d)return false;
+  if(d.shopCost===0)return true; // default towers always unlocked
+  return getUnlocks().includes(type);
+}
+function unlockTower(type){
+  const d=TDEFS[type];
+  if(!d||isUnlocked(type))return false;
+  const cr=getCredits();
+  if(cr<d.shopCost)return false;
+  addCredits(-d.shopCost);
+  const u=getUnlocks();u.push(type);saveUnlocks(u);
+  return true;
+}
+
+// ── SHOP SCREEN ────────────────────────────────────────────────
+function showShopScreen(){
+  document.getElementById('scr-menu').style.display='none';
+  document.getElementById('scr-shop').style.display='flex';
+  renderShopGrid();
+}
+function closeShopScreen(){
+  document.getElementById('scr-shop').style.display='none';
+  document.getElementById('scr-menu').style.display='flex';
+  updateMenuCr();
+}
+function renderShopGrid(){
+  document.getElementById('shop-cr').textContent=getCredits()+' ⚡';
+  const grid=document.getElementById('shop-grid');
+  grid.innerHTML='';
+  for(const[type,d]of Object.entries(TDEFS)){
+    const owned=isUnlocked(type);
+    const isDefault=d.shopCost===0;
+    const canAfford=getCredits()>=d.shopCost;
+    const card=document.createElement('div');
+    card.className='shop-card'+(owned&&!isDefault?' owned':'')+(isDefault?' default-tower':'');
+    card.style.setProperty('--card-col',d.col);
+    let btnClass,btnText;
+    if(isDefault){btnClass='is-default';btnText='⚡ DEFAULT TOWER'}
+    else if(owned){btnClass='is-owned';btnText='✓ UNLOCKED'}
+    else if(canAfford){btnClass='can-buy';btnText=`🔓 UNLOCK · ${d.shopCost} ⚡`}
+    else{btnClass='cant-buy';btnText=`🔒 ${d.shopCost} ⚡ NEEDED`}
+    card.innerHTML=`
+      <div class="sc-emoji">${d.em}</div>
+      <div class="sc-name" style="color:${d.col}">${d.name}</div>
+      <div class="sc-desc">${d.desc}</div>
+      <div class="sc-stats">
+        <div class="sc-stat"><span class="sc-stat-l">⚔️ Damage</span><span class="sc-stat-v">${d.dmg}${d.splash?' (AOE)':''}</span></div>
+        <div class="sc-stat"><span class="sc-stat-l">📡 Range</span><span class="sc-stat-v">${d.range} cells</span></div>
+        <div class="sc-stat"><span class="sc-stat-l">🔥 Fire Rate</span><span class="sc-stat-v">${d.rate}/s</span></div>
+        <div class="sc-stat"><span class="sc-stat-l">💰 In-Game Cost</span><span class="sc-stat-v">${d.cost}g</span></div>
+        ${d.slowF?`<div class="sc-stat"><span class="sc-stat-l">❄️ Slow</span><span class="sc-stat-v">${Math.round((1-d.slowF)*100)}% for ${d.slowT}s</span></div>`:''}
+      </div>
+      <button class="sc-buy ${btnClass}" data-type="${type}"${isDefault||owned?' disabled':''}>${btnText}</button>
+    `;
+    grid.appendChild(card);
+  }
+  // bind buy buttons
+  grid.querySelectorAll('.sc-buy.can-buy').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const type=btn.dataset.type;
+      if(unlockTower(type)){
+        showToast(`🔓 ${TDEFS[type].name} UNLOCKED!`);
+        renderShopGrid();
+      }
+    });
+  });
+}
+function showToast(msg){
+  const t=document.getElementById('shop-toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
 function showGO(won){
   const el=document.getElementById('scr-go'),t=document.getElementById('gotitle');
   t.textContent=won?'🏆 VICTORY!':'💀 GAME OVER';t.className='gotitle '+(won?'win':'lose');
@@ -721,10 +1162,74 @@ function showGO(won){
   document.getElementById('go-total-cr').textContent=getCredits()+' ⚡';
   el.style.display='flex';
 }
+// ── LOADOUT ────────────────────────────────────────────────────
+const MAX_LOADOUT=5;
+let pendingDiff='medium';
+let activeLoadout=[];
+
+function showLoadout(diff){
+  pendingDiff=diff;
+  // Pre-select first 4 default towers
+  const unlocked=Object.keys(TDEFS).filter(t=>isUnlocked(t));
+  activeLoadout=unlocked.slice(0,Math.min(MAX_LOADOUT,unlocked.length));
+  document.getElementById('scr-diff').style.display='none';
+  document.getElementById('scr-loadout').style.display='flex';
+  const badge=document.getElementById('lo-diff-badge');
+  badge.className='lo-diff-badge lo-diff-'+diff;
+  badge.textContent=diff==='casual'?'🌿 CASUAL':'⚔️ MEDIUM';
+  renderLoadoutGrid();
+}
+function backFromLoadout(){
+  document.getElementById('scr-loadout').style.display='none';
+  document.getElementById('scr-diff').style.display='flex';
+}
+function renderLoadoutGrid(){
+  const grid=document.getElementById('lo-grid');
+  grid.innerHTML='';
+  const unlocked=Object.keys(TDEFS).filter(t=>isUnlocked(t));
+  for(const type of unlocked){
+    const d=TDEFS[type];
+    const picked=activeLoadout.includes(type);
+    const full=activeLoadout.length>=MAX_LOADOUT&&!picked;
+    const card=document.createElement('div');
+    card.className='lo-card'+(picked?' lo-picked':'')+(full?' lo-disabled':'');
+    card.style.setProperty('--card-col',d.col);
+    card.innerHTML=`
+      <div class="lo-em">${d.em}</div>
+      <div class="lo-nm" style="color:${d.col}">${d.name}</div>
+      <div class="lo-ds">${d.desc}</div>
+      <div class="lo-cost">${d.cost}💰</div>
+    `;
+    card.addEventListener('click',()=>{
+      if(picked){
+        activeLoadout=activeLoadout.filter(x=>x!==type);
+      }else if(activeLoadout.length<MAX_LOADOUT){
+        activeLoadout.push(type);
+      }
+      renderLoadoutGrid();
+    });
+    grid.appendChild(card);
+  }
+  document.getElementById('lo-cnt').textContent=activeLoadout.length;
+  const cntEl=document.getElementById('lo-cnt');
+  cntEl.className='lo-cnt'+(activeLoadout.length>=MAX_LOADOUT?' lo-full':'');
+  const goBtn=document.getElementById('lo-go-btn');
+  goBtn.disabled=activeLoadout.length===0;
+}
+function launchFromLoadout(){
+  if(activeLoadout.length===0)return;
+  document.getElementById('scr-loadout').style.display='none';
+  startGame(pendingDiff);
+}
+
 function buildCards(){
   const el=document.getElementById('tcards');el.innerHTML='';
-  for(const[type,d]of Object.entries(TDEFS)){
-    const c=document.createElement('div');c.className='twc'+(type===G.selType?' sel':'');c.dataset.t=type;
+  for(const type of activeLoadout){
+    const d=TDEFS[type];
+    if(!d)continue;
+    const c=document.createElement('div');
+    c.className='twc'+(type===G.selType?' sel':'');
+    c.dataset.t=type;
     c.innerHTML=`<div class="twe">${d.em}</div><div class="twb"><div class="twn">${d.name}</div><div class="twd">${d.desc}</div></div><div class="twp">${d.cost}💰</div>`;
     c.addEventListener('click',()=>{G.selType=type;if(G.selTw)G._desel();else showShop();document.querySelectorAll('.twc').forEach(x=>x.classList.toggle('sel',x.dataset.t===type))});
     el.appendChild(c);
@@ -736,6 +1241,8 @@ function showMenu(){
   document.getElementById('scr-diff').style.display='none';
   document.getElementById('scr-htp').style.display='none';
   document.getElementById('scr-go').style.display='none';
+  document.getElementById('scr-shop').style.display='none';
+  document.getElementById('scr-loadout').style.display='none';
   document.getElementById('topbar').style.display='none';
   document.getElementById('game-area').style.display='none';
   document.getElementById('scr-menu').style.display='flex';
@@ -759,7 +1266,10 @@ function startGame(diff){
   document.getElementById('scr-go').style.display='none';
   document.getElementById('topbar').style.display='flex';
   document.getElementById('game-area').style.display='block';
-  if(!G){G=new Game();buildCards()}
+  if(!G){G=new Game()}
+  // Ensure selType is a valid loadout tower
+  if(!activeLoadout.includes(G.selType))G.selType=activeLoadout[0]||'basic';
+  buildCards();
   G.start(diff||G.diff||'medium');
 }
 function restartGame(){
@@ -776,6 +1286,8 @@ document.getElementById('topbar').style.display='none';
 document.getElementById('game-area').style.display='none';
 document.getElementById('scr-diff').style.display='none';
 document.getElementById('scr-htp').style.display='none';
+document.getElementById('scr-shop').style.display='none';
+document.getElementById('scr-loadout').style.display='none';
 updateMenuCr();
 </script>
 </body>
